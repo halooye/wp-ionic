@@ -1,0 +1,54 @@
+page-friend-index {
+    .content-md,.content-ios{
+        background: color($colors, graybg);
+        color: color($colors, dark);
+    }
+    .friend-tab{
+        text-align: center;
+        background: color($colors, white);
+        border-top:1px solid #d9d9d9;
+        border-bottom:1px solid #d9d9d9;
+        span{
+            display: inline-block;
+            color:#a1a2a7;
+            font-size:1.6rem;
+            line-height: 1;
+            padding:12px 0 6px 0;
+            margin: 0 8% 2px 8%;
+        }
+        .active-tab{
+            color: color($colors, dark);
+            border-bottom:3px solid color($colors, dark);
+        }
+    }
+
+    ion-slides{
+        background: color($colors, graybg);
+        ion-slide{
+            font-size:inherit!important;
+            .slide-zoom {
+                overflow: auto;
+                height: 100%;
+                .scroll-content,.fixed-content{
+                    background: color($colors, graybg);
+                    margin:0!important;
+                    border-top:0!important;
+                }
+            }
+        }
+    }
+
+    .no-data{
+        text-align: center;
+        p{
+            color:#888;
+            font-size:1.45rem;
+        }
+        img{
+            width:60%;
+            opacity:0.5;
+        }
+    }
+
+
+}

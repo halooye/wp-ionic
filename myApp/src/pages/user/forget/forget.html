@@ -1,0 +1,28 @@
+<!--
+  找回密码
+-->
+<ion-header>
+    <ion-navbar>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list no-lines>
+        <ion-item style="background:none;font-weight:bold;" text-center>
+        找回密码
+        </ion-item>
+        <div text-center>您需要先验证您的手机号</div>
+    </ion-list>
+    <ion-grid>
+        <ion-item>
+            <ion-input type="number" [(ngModel)]="codeParam.phone" placeholder="请输入您的手机号"></ion-input>
+        </ion-item>
+        <ion-item margin-bottom>
+            <ion-input type="number" [(ngModel)]="params.verificationCode" placeholder="请输入验证码"></ion-input>
+            <button item-right ion-button clear [disabled]="!verifyCode.disable" (click)="getCode()" style="font-size:1.6rem;margin:0;padding:0;" color="dark">{{verifyCode.verifyCodeTips}}</button>
+        </ion-item>
+        <ion-row margin-top>
+            <button ion-button round color="dark" block [disabled]="!disable" (click)="doReset()">下一步</button>
+        </ion-row>
+    </ion-grid>
+</ion-content>

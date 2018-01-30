@@ -1,0 +1,47 @@
+<!--
+  我的患者
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我的患者</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="刷新中...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <ion-list>
+        <button ion-item *ngFor="let item of items">
+            <div class="placeholder"></div>
+            <ion-avatar item-start>
+                <img class="box-shadow" src="{{item.faceimage}}" *ngIf="item.faceimage">
+                <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!item.faceimage">
+            </ion-avatar>
+            <h2>{{item.name}}</h2>
+            <h3 ion-text color="gray">{{item.address}}</h3>
+            <button ion-button item-end round outline color="dark"><ion-icon name="dossier" class="dossier"></ion-icon> 病历</button>
+        </button>
+    </ion-list>
+
+    <ion-list *ngIf="!noData" text-center padding>
+        暂无诊所患者记录！
+    </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)"
+                         *ngIf="items.length%20==0 && items.length>0">
+      <ion-infinite-scroll-content loadingText="加载更多数据..." style="min-height: 40px">
+
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

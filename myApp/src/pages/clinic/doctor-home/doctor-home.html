@@ -1,0 +1,147 @@
+<!--
+     医生主页
+-->
+<ion-header>
+
+  <ion-navbar style="display:none;">
+    <ion-title>医生主页</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+      <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="刷新中...">
+        </ion-refresher-content>
+      </ion-refresher>
+
+      <div class="head" [style.background-image]="bgSrc" style="background-color:#e9e9e9;">
+        <ion-icon class="go-back" name="arrow-back" tappable (click)="goBack()"></ion-icon>
+        <button class="edit-bg" ion-button clear color="white" *ngIf="myDotorBg" (click)="uploadBg()">
+            封面图片编辑
+        </button>
+      </div>
+
+      <ion-list>
+        <ion-card style="margin:-40px 0 0 16px;width:calc(100% - 32px); border-radius:12px;">
+          <ion-list>
+            <ion-item>
+              <ion-avatar item-start>
+                <img class="box-shadow" src="{{imgUrl}}{{doctor.faceImage}}" *ngIf="doctor.faceImage">
+                <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!doctor.faceImage">
+              </ion-avatar>
+              <h2>{{doctor.name}}</h2>
+              <h4 ion-text color="gray">
+                  {{doctor.title}}  | {{doctor.department}}<br>
+                {{doctor.hospital}}<br>
+                <span>约诊费 <b ion-text color="lightBlue">{{doctor.money}}</b>元</span>
+            </h4>
+              <div class="cliin-home" (tap)="cliinHome()" text-center>
+                <ion-icon name="yiyuan"></ion-icon>
+                <div *ngIf="!myDotorBg">Ta的诊所</div>
+                <div *ngIf="myDotorBg">我的诊所</div>
+              </div>
+            </ion-item>
+            <ion-row text-center class="my-total">
+              <ion-col col-3>
+                <b>{{clinic.doctorRef}}</b>
+                <span>转诊</span>
+                <i>|</i>
+              </ion-col>
+              <ion-col col-3>
+                <b>{{clinic.doctorRecive}}</b>
+                <span>接诊</span>
+                <i>|</i>
+              </ion-col>
+              <ion-col col-3>
+                <b>{{clinic.doctorCount}}</b>
+                <span>专家</span>
+                <i>|</i>
+              </ion-col>
+              <ion-col col-3>
+                <b>{{clinic.departmentCount}}</b>
+                <span>科室</span>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+        </ion-card>
+      </ion-list>
+
+      <ion-list>
+        <ion-card style="margin:0 0 0 16px;width:calc(100% - 32px);border-top:.5rem solid #307fa0">
+          <ion-list style="padding:6px 0;">
+            <div class="title"><span>个人简介</span></div>
+            <div class="aboutus" padding-left padding-right *ngIf="doctor.note!=null">{{doctor.note}}</div>
+            <div class="aboutus" padding-left padding-right *ngIf="doctor.note==null">医生太忙啦,还没有填写</div>
+            <div class="title"><span>擅长领域</span></div>
+            <div class="aboutus" padding-left padding-right *ngIf="illness[0]==undefined">医生太忙啦,还没有填写</div>
+            <ion-row class="labelList" padding-left padding-right *ngIf="illness[0]!=undefined">
+              <span *ngFor="let item of illness">{{item.name}}</span>
+            </ion-row>
+            <div class="title" *ngIf="outpatient[0]"><span>门诊时间表</span></div>
+            <!-- <div class="aboutus" padding-left padding-right padding-bottom *ngIf="outpatient[0]==undefined">医生太忙啦,还没有填写</div> -->
+            <ion-row padding-left margin-bottom padding-right *ngIf="outpatient[0]!=undefined">
+              <ion-col col-12>
+                <div class="schedule">
+                  <span></span>
+                  <span>一</span>
+                  <span>二</span>
+                  <span>三</span>
+                  <span>四</span>
+                  <span>五</span>
+                  <span>六</span>
+                  <span>日</span>
+                  <span>上午</span>
+                  <!--checkmark-circle-->
+                  <span *ngFor="let item of morning"><ion-icon name="checkmark-circle" [style.color]="item.color" *ngIf="item.isShow"></ion-icon></span>
+                  <span>下午</span>
+                  <span *ngFor="let item of afternoon"><ion-icon name="checkmark-circle" [style.color]="item.color" *ngIf="item.isShow"></ion-icon></span>
+                  <span>夜间</span>
+                  <span *ngFor="let item of noon"><ion-icon name="checkmark-circle" [style.color]="item.color" *ngIf="item.isShow"></ion-icon></span>
+                </div>
+              </ion-col>
+              <ion-col col-12 class="schedule-right">
+                <span><ion-icon name="checkmark-circle" style="color:#d5d6d9"></ion-icon> 普通门诊</span>
+                <span><ion-icon name="checkmark-circle" style="color:#f281a1"></ion-icon> 专家门诊</span>
+                <span><ion-icon name="checkmark-circle" style="color:#83e3ac"></ion-icon> 特约门诊</span>
+                <span><ion-icon name="checkmark-circle" style="color:#f3a066"></ion-icon> 特需门诊</span>
+                <span><ion-icon name="checkmark-circle" style="color:#66b6f3"></ion-icon> 专病门诊</span>
+                <span><ion-icon name="checkmark-circle" style="color:#d2a7f3"></ion-icon> 其它门诊</span>
+              </ion-col>
+            </ion-row>
+          </ion-list>
+        </ion-card>
+      </ion-list>
+
+</ion-content>
+
+<ion-footer style="padding:0;" *ngIf="!myDotorBg">
+    <ion-toolbar style="padding:0;">
+        <ion-row class="sendMsg" text-center>
+            <ion-col col-4 style="line-height:3rem;" tappable (click)="sendMsg()">
+                发消息
+            </ion-col>
+            <ion-col col-4 *ngIf="!status.isHisPartner" tappable (click)="applyPartner(doctor.id, clinic.name)">
+                {{isApply ? '申请' : '已申请'}}
+                <span>{{isApply ? '加入Ta的诊所' : '已申请加入Ta的诊所'}}</span>
+            </ion-col>
+            <ion-col col-4 *ngIf="status.isHisPartner">
+                已加入
+                <span>Ta的诊所</span>
+            </ion-col>
+            <ion-col col-4 *ngIf="!status.isMyPartner" tappable (click)="invitPartner(doctor.id, clinic.name)">
+                {{isInvit ? '邀请' : '已邀请'}}
+                <span>{{isInvit ? '加入我的诊所' : '已邀请加入我的诊所'}}</span>
+            </ion-col>
+            <ion-col col-4 *ngIf="status.isMyPartner">
+                已加入
+                <span>我的诊所</span>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

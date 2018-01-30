@@ -1,0 +1,34 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>申请与邀请</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+     <ion-list>
+       <div class="list" *ngFor="let doctor of items; let i = index; let last = last">
+         <button ion-item class="partner-item" (click)="doctorHome(doctor)">
+           <div class="placeholder"></div>
+           <ion-avatar item-start>
+             <img class="img-border" src="{{imgUrl}}{{doctor.docImg}}" *ngIf="doctor.faceimage">
+             <img class="img-border" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!doctor.faceimage">
+           </ion-avatar>
+           <h2>{{doctor.docName}} <span ion-text>{{doctor.departmentName}} &nbsp;|&nbsp; {{doctor.departmentFunctionName}}</span></h2>
+           <h4 ion-text color="gray" *ngIf="!doctor.isApply">邀请您加入TA的诊所</h4>
+           <h4 ion-text color="gray" *ngIf="doctor.isApply">申请加入您的诊所</h4>
+           <button ion-button clear item-end *ngIf="doctor. state  != null" style="width:36px">&nbsp;</button>
+         </button>
+         <div class="operating" *ngIf="!doctor.isApply">
+           <button ion-button round outline item-end color="dark" (click)="invit(doctor,i)" *ngIf="doctor.state == false">同意</button>
+           <button ion-button clear item-end color="dark" *ngIf="doctor.state == true">已同意</button>
+         </div>
+         <div class="operating" *ngIf="doctor.isApply">
+           <button ion-button round outline item-end color="dark" (click)="apply(doctor,i)" *ngIf="doctor.state == false">接受</button>
+           <button ion-button clear item-end color="dark" *ngIf="doctor.state == true">已接受</button>
+         </div>
+       </div>
+     </ion-list>
+</ion-content>

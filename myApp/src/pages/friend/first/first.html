@@ -1,0 +1,74 @@
+<!--
+      一度人脉
+-->
+<ion-list>
+    <div class="subtitle" padding-left>1.加入我诊所的医师; 2.我加入诊所的C医O</div>
+    <div class="department" *ngIf="firstTab.length < 6">
+       <ion-row>
+           <span [ngClass]="!dfId ? 'active':''" tappable (click)="viewPartner('')">全部科室 ({{firstDoctorsCount}})</span>
+           <span [ngClass]="department.departmentFunctionId === dfId ? 'active':''" *ngFor="let department of firstTab" tappable (click)="viewPartner(department.departmentFunctionId)">{{department.departmentFunctionName}} ({{department.departmentFunctionCount}})</span>
+       </ion-row>
+    </div>
+
+    <div class="department" *ngIf="firstTab.length > 5">
+        <ion-row class="dlist" [ngStyle]="{'max-height': idDheight ? '6rem' : 'none' }">
+            <span [ngClass]="!dfId ? 'active' : ''" tappable (click)="viewPartner('')">全部科室 ({{firstDoctorsCount}})</span>
+            <span [ngClass]="department.departmentFunctionId === dfId ? 'active':''" *ngFor="let department of firstTab" tappable (click)="viewPartner(department.departmentFunctionId)">{{department.departmentFunctionName}} ({{department.departmentFunctionCount}})</span>
+        </ion-row>
+        <div text-center tappable (click)="departmentMore()">
+            <ion-icon [name]="arrow"></ion-icon>
+        </div>
+    </div>
+
+    <div *ngFor="let doctor of firstList; let i = index; let last = last">
+
+        <div class="list" *ngIf="!dfId">
+            <button ion-item class="partner-item" (click)="doctorHome('0', doctor)">
+                <div class="placeholder"></div>
+                <ion-avatar item-start>
+                    <img class="box-shadow" src="{{imgUrl}}{{doctor.docImg}}" *ngIf="doctor.docImg">
+                    <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!doctor.docImg">
+                </ion-avatar>
+                <h2>{{doctor.docName}} <span ion-text color="gray">{{doctor.departmentName}} &nbsp;|&nbsp; {{doctor.departmentFunctionName}}</span></h2>
+                <h4 ion-text color="gray">{{doctor.hospitalName}}</h4>
+                <h4 ion-text color="dark">约诊费：<span ion-text color="lightBlue">{{doctor.treatmentMoney}}</span>元</h4>
+                <button ion-button clear item-end style="width:50px">&nbsp;</button>
+            </button>
+
+            <div class="operating">
+                 <button ion-button round outline item-end color="dark" *ngIf="!doctor.isHisPartner" (click)="doctorHome('1', doctor)">
+                     申请
+                 </button>
+                 <button ion-button round outline item-end color="dark" *ngIf="!doctor.isMyPartner" (click)="doctorHome('2', doctor)">
+                     邀请
+                 </button>
+                 <button ion-button clear item-end color="dark" *ngIf="doctor.isMyPartner && doctor.isHisPartner" style="padding:0;"><ion-icon ios="ios-repeat" md="md-repeat"></ion-icon> 互相加入</button>
+            </div>
+        </div>
+
+        <div class="list" *ngIf="doctor.departmentFunctionId == dfId">
+            <button ion-item class="partner-item" (click)="doctorHome('0', doctor)">
+                <div class="placeholder"></div>
+                <ion-avatar item-start>
+                    <img class="box-shadow" src="{{imgUrl}}{{doctor.docImg}}" *ngIf="doctor.docImg">
+                    <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!doctor.docImg">
+                </ion-avatar>
+                <h2>{{doctor.docName}} <span ion-text color="gray">{{doctor.departmentName}} &nbsp;|&nbsp; {{doctor.departmentFunctionName}}</span></h2>
+                <h4 ion-text color="gray">{{doctor.hospitalName}}</h4>
+                <h4 ion-text color="dark">约诊费：<span ion-text color="lightBlue">{{doctor.treatmentMoney}}</span>元</h4>
+                <button ion-button clear item-end style="width:50px">&nbsp;</button>
+            </button>
+
+            <div class="operating">
+                 <button ion-button round outline item-end color="dark" *ngIf="!doctor.isHisPartner" (click)="doctorHome('1', doctor)">
+                     申请
+                 </button>
+                 <button ion-button round outline item-end color="dark" *ngIf="!doctor.isMyPartner" (click)="doctorHome('2', doctor)">
+                     邀请
+                 </button>
+                 <button ion-button clear item-end color="dark" *ngIf="doctor.isMyPartner && doctor.isHisPartner" style="padding:0;"><ion-icon ios="ios-repeat" md="md-repeat"></ion-icon> 互相加入</button>
+            </div>
+        </div>
+
+    </div>
+</ion-list>

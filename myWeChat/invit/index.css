@@ -1,0 +1,183 @@
+.index {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: url("../assets/imgs/invit/background.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  text-align: center;
+  color: #454b5a;
+}
+.index .index-register {
+  padding-top: 4.8rem;
+}
+.index .index-register .index-head {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  border: 2px solid #eeeeee;
+  margin-bottom: 1.4rem;
+}
+.index .index-register .index-content {
+  font-size: 1.3rem;
+  margin-bottom: 5rem;
+}
+.index .index-register .index-content span {
+  color: #307fa0;
+}
+.index .index-register .index-tel {
+  width: 28.5rem;
+  border: none;
+  background: none;
+  border-bottom: 1px solid #c4c5c6;
+  font-size: 1.4rem;
+  height: 3.1rem;
+  line-height: 3.1rem;
+}
+.index .index-register .index-password {
+  width: 28.5rem;
+  height: 5.5rem;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 5rem;
+  font-size: 1.4rem;
+}
+.index .index-register .index-password input {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  border: none;
+  background: none;
+  border-bottom: 1px solid #c4c5c6;
+  height: 3.1rem;
+  line-height: 3.1rem;
+}
+.index .index-register .index-password button {
+  position: absolute;
+  background: none;
+  border: none;
+  right: 0;
+  bottom: 1rem;
+}
+.index .index-register .index-confirm {
+  display: block;
+  background-color: #454b5a;
+  width: 25rem;
+  height: 4rem;
+  margin: 0 auto;
+  color: white;
+  font-size: 1.4rem;
+  line-height: 4rem;
+  border-radius: 4rem;
+}
+.index .index-member1 {
+  position: absolute;
+  width: 100%;
+  top: 28%;
+  text-align: center;
+  display: none;
+}
+.index .index-member1 img {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  margin-bottom: 2.5rem;
+}
+.index .index-member1 h6 {
+  font-size: 1.3rem;
+}
+.index .index-member2 {
+  position: absolute;
+  width: 100%;
+  bottom: 28%;
+  text-align: center;
+  display: none;
+}
+.index .index-member2 .index-open {
+  width: 25rem;
+  height: 4rem;
+  border-radius: 4rem;
+  background-color: #454b5a;
+  color: white;
+  margin: 0 auto;
+  font-size: 1.4rem;
+  line-height: 4rem;
+  margin-bottom: 1rem;
+}
+.index .index-member2 h6 {
+  font-size: 1.3rem;
+}
+.index .index-login {
+  display: none;
+  padding-top: 9rem;
+}
+.index .index-login h6 {
+  font-size: 1.3rem;
+}
+.index .index-login .index-head {
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  border: 2px solid #eeeeee;
+  margin-bottom: 1.1rem;
+}
+.index .index-login h6:nth-of-type(1) {
+  margin-bottom: 4.2rem;
+}
+.index .index-login .index-hasAccount {
+  border: none;
+  border-bottom: 1px solid #c4c5c6;
+  background: none;
+  width: 28.5rem;
+  height: 3.3rem;
+  line-height: 3.3rem;
+  margin: 0 auto;
+  position: relative;
+  margin-bottom: 5rem;
+  font-size: 1.5rem;
+}
+.index .index-login .index-confirm {
+  display: block;
+  background-color: #454b5a;
+  width: 25rem;
+  height: 4rem;
+  margin: 0 auto;
+  color: white;
+  font-size: 1.4rem;
+  line-height: 4rem;
+  border-radius: 4rem;
+  margin-bottom: 1.5rem;
+}
+.index-name {
+  color: #307fa0;
+}
+.index-logo {
+  display: block;
+  width: 14rem;
+  position: absolute;
+  bottom: 8.5rem;
+  left: 11.75rem;
+}
+.toast {
+  width: 60%;
+  min-width: 150px;
+  background: #000;
+  color: #fff;
+  line-height: 1.6rem;
+  text-align: center;
+  border-radius: 5px;
+  position: absolute ;
+  left: 20%;
+  z-index: 999999;
+  padding: 10px;
+  font-size: 1.3rem;
+}
+.toast-middle {
+  top: 40%;
+}
+.toast-bottom {
+  bottom: 0;
+  width: 100%!important;
+  left: 0!important;
+}

@@ -1,0 +1,24 @@
+
+<!-- 微信分享 -->
+
+<ion-header>
+    <ion-navbar>
+        <ion-title>邀请</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div class="subtitle" padding-left>邀请同行或患者加入您的诊所</div>
+    <button ion-item (click)="addShare(0)">
+        <ion-avatar item-start>
+            <img src="assets/imgs/weixin.png">
+        </ion-avatar>
+        <h2>邀请微信好友</h2>
+    </button>
+    <button ion-item (click)="addShare(1)">
+        <ion-avatar item-start>
+            <img src="assets/imgs/pengyou.png">
+        </ion-avatar>
+        <h2>邀请朋友圈好友</h2>
+    </button>
+</ion-content>

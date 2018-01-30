@@ -1,0 +1,58 @@
+<!--
+    我加入的诊所
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>我加入的诊所</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="刷新中...">
+        </ion-refresher-content>
+    </ion-refresher>
+     <div class="subtitle" padding-left>我加入的诊所的C医O</div>
+    <ion-list style="margin-top:0;">
+         <!--<button ion-item *ngFor="let item of items" tappable (click)="clinicHome(item.clinicId)">-->
+         <!--<div class="placeholder"></div>-->
+         <!--<ion-avatar item-start class="item-start">-->
+         <!--<img class="box-shadow" src="{{imgUrl}}{{item.faceImage}}" *ngIf="item.faceImage">-->
+         <!--<img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!item.faceImage">-->
+         <!--</ion-avatar>-->
+         <!--<h2>{{item.clinicName}}</h2>-->
+         <!--<h3 ion-text color="gray">诊所CEO：{{item.doctorName}}</h3>-->
+         <!--<p ion-text color="gray"><ion-icon name="yisheng3"></ion-icon> 专家：{{item.doctorCount}} <span class="ml20"><ion-icon name="keshi"></ion-icon> 科室：{{item.departmentCount}}</span></p>-->
+         <!--</button>-->
+
+         <div class="list" *ngFor="let doctor of items; let i = index; let last = last">
+           <button ion-item class="partner-item" (click)="clinicHome('0', doctor)">
+             <div class="placeholder"></div>
+             <ion-avatar item-start>
+               <img class="box-shadow" src="{{imgUrl}}{{doctor.faceimage}}" *ngIf="doctor.faceimage">
+               <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!doctor.faceimage">
+             </ion-avatar>
+             <h2>{{doctor.doctorName}} <span ion-text color="gray">{{doctor.doctorLevel}} &nbsp;|&nbsp; {{doctor.departmentFunctionName}}</span></h2>
+             <h4 ion-text color="gray">{{doctor.hospital}}</h4>
+             <h4 ion-text color="dark">约诊费：<span ion-text color="lightBlue">{{doctor.treatmentMoney}}</span>元</h4>
+             <button ion-button clear item-end *ngIf="doctor.isInvited != null" style="width:36px">&nbsp;</button>
+           </button>
+           <div class="operating">
+             <button ion-button round outline item-end color="dark" *ngIf="doctor.isInvited == false" (click)="clinicHome('1', doctor)">邀请</button>
+             <button ion-button clear item-end color="dark" *ngIf="doctor.isInvited == true">已邀请</button>
+           </div>
+         </div>
+        </ion-list>
+
+    <ion-infinite-scroll (ionInfinite)="doInfinite($event)" *ngIf="items.length%20==0 && items.length>0">
+      <ion-infinite-scroll-content loadingText="加载更多数据..."></ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

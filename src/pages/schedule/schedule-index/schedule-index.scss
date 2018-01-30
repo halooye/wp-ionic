@@ -1,0 +1,325 @@
+page-schedule-index {
+    .content-md,.content-ios{
+        background: color($colors, graybg);
+        color: color($colors, dark);
+    }
+    .closure{
+        background:#d64331;
+        color:#fff;
+        padding:8px 10px;
+        border-radius:20px;
+        line-height:1;
+        font-size:1.2rem;
+        margin-right:8px;
+    }
+    .closure:active{
+        opacity:0.75;
+    }
+
+    .swiper-slide{
+        font-size:inherit;
+    }
+
+    .calendar-header{
+        width: 100%;
+        background: color($colors, dark);
+    }
+
+
+    .calendar-title{
+        height:0;
+        overflow: hidden;
+        color: white;
+        font-size:1.6rem;
+        position: relative;
+        width: 100%;
+        line-height: 48px;
+        text-align:center;
+        font-weight: 100;
+
+        .swiper-button-prev{
+            position:inherit;
+            top: 2px;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            display: inline-block;
+            width: 0px;
+            height: 0px;
+            border-left: 0px;
+            border-top: 8px solid transparent;
+            border-right: 8px solid white;
+            border-bottom: 8px solid transparent;
+            margin-right:10px;
+        }
+        .swiper-button-next{
+            position:inherit;
+            top: 2px;
+            left: auto;
+            right: auto;
+            bottom: auto;
+            display: inline-block;
+            width: 0px;
+            height: 0px;
+            border-right: 0px;
+            border-top: 8px solid transparent;
+            border-left: 8px solid white;
+            border-bottom: 8px solid transparent;
+            margin-left:10px;
+        }
+        .today{
+            position:absolute;
+            top:13px;
+            right:16px;
+            display: inline-block;
+            background: #7d818c;
+            font-size:1.2rem;
+            padding:3px 8px;
+            border-radius:20px;
+            line-height:1.2;
+        }
+    }
+
+    .calendar-week{
+        color: white;
+        width:100%;
+        font-weight: 100;
+        padding-bottom:6px;
+        display: table;
+        border-collapse: separate;
+        span{
+            display:table-cell;
+            text-align: center;
+        }
+    }
+
+    .calendar-arrow{
+        text-align: center;
+        color: #d1d4dc;
+        font-size:1.6rem;
+        line-height: 1;
+        padding:8px 0;
+    }
+
+    .business{
+        display: inline-block;
+        background: #86c131;
+        width: 10px;
+        height: 10px;
+        border-radius:100%;
+    }
+
+    .referral{
+        display: inline-block;
+        background: #f8962b;
+        width:10px;
+        height:10px;
+        border-radius:100%;
+    }
+
+    .pageMonthSlides, .pageWeekSwiper{
+        height:0;
+        overflow: hidden;
+        background: color($colors, dark);
+        color: white;
+        .business-referral{
+            display: inline-block;
+            background: #86c131;
+            width:7px;
+            height:7px;
+            border-radius:100%;
+            overflow: hidden;
+            b{
+                position: absolute;
+                background:#f8962b;
+                left:3px;
+                width:6px;
+                height:6px;
+            }
+        }
+
+        .swiper-slide{
+            display: block;
+            font-size:inherit;
+            .calendar-ul{
+                width:100%;
+                display: table;
+                border-collapse: separate;
+                font-size:1.6rem;
+                font-weight: 100;
+                .calendar-li{
+                    display:table-cell;
+                    text-align: center;
+                    span{
+                        position:relative;
+                        display:inline-block;
+                        width:34px;
+                        height:34px;
+                        line-height: 34px;
+                        border-radius: 100%;
+                        i{
+                            position: absolute;
+                            bottom:2px;
+                            left:13px;
+                            width:6px;
+                            height:6px;
+                        }
+                    }
+                }
+            }
+
+            .currentDay{
+                span{
+                    border:1px #7d818c solid;
+                }
+            }
+            .currentMonth{
+                color: white;
+            }
+            .otherMonth{
+                color: #8f8f99;
+            }
+
+            .currentChecked{
+                background:#7d818c;
+                color: white;
+            }
+        }
+    }
+
+    .header-tab{
+        background: color($colors, white);
+        border-bottom:1px #d9d9d9 solid;
+        span{
+            display: inline-block;
+            color:#a1a2a7;
+            font-size:1.6rem;
+            line-height: 1;
+            padding:5px 0;
+            margin-left:8px;
+        }
+        .active-tab{
+            .businessBorder{
+                color: color($colors, dark);
+                border-bottom:3px solid #87c133;
+            }
+            .referralBorder{
+                color: color($colors, dark);
+                border-bottom:3px solid #fb982a;
+            }
+        }
+    }
+
+    .claendar-list{
+        .swiper-slide{
+            display: block;
+            overflow: auto;
+        }
+        .slide-zoom{
+            text-align: left;
+        }
+
+        .item-ios[detail-push] .item-inner, button.item-ios:not([detail-none]) .item-inner, a.item-ios:not([detail-none]) .item-inner{
+            background-image:none;
+            padding-right: 8px;
+        }
+        .schedule-button{
+            border-top:1px #d9d9d9 solid!important;
+            border-bottom:1px #d9d9d9 solid!important;
+            position: relative;
+            padding-top: 2.2rem;
+            margin-top: 10px;
+            ion-thumbnail{
+                // min-height: 6.2rem!important;
+                img{
+                    width: 50px;
+                    height: 50px;
+                }
+            }
+            .schedule-title{
+                width: calc(100% - 32px);
+                position: absolute;
+                top: 0;
+                left: 16px;
+                border-bottom: 1px solid #dfdfdf;
+                font-size: 1.4rem;
+                line-height: 2.2rem;
+                display: block;
+                overflow: hidden;
+                span{
+                    display: inline-block;
+                    vertical-align: middle;
+                }
+                .schedule-gray{
+                    font-size: 1.3rem;
+                    width: 50%;
+                    color:#a1a2a7;
+                }
+                .schedule-state{
+                    float: right;
+                }
+            }
+            .schedule-click{
+                font-size:1.2rem;
+                ion-icon{
+                    font-size:3.2rem;
+                }
+            }
+            // .item-inner{
+            //     .input-wrapper{
+            //       ion-label{
+            //         margin: 10px 8px 10px 0;
+            //       }
+            //     }
+            // }
+
+        }
+
+        .item-md ion-thumbnail{
+            min-width: 70px;
+        }
+        .item-md ion-thumbnail img{
+            margin-top:14px;
+        }
+
+        .item-md ion-avatar[item-left], .item-md ion-thumbnail[item-left], .item-md ion-avatar[item-start], .item-md ion-thumbnail[item-start]{
+            margin-right:0;
+        }
+
+        .schedule-overflow{
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1.5;
+            font-size:1.3rem;
+        }
+    }
+
+    .has-refresher > .scroll-content{
+        border-top:0;
+    }
+    .list-ios .item-block .item-inner, .list-md .item-block .item-inner{
+        border-bottom:0;
+    }
+
+    .isCalendar, .isCalendarMore{
+        height:auto;
+    }
+
+    .no-data{
+        text-align: center;
+        padding-top:2rem;
+        p{
+            color:#888;
+            font-size:1.45rem;
+        }
+        img{
+            width:40%;
+            opacity:0.5;
+        }
+    }
+
+
+    @media screen and (min-width: 320px) and (max-width: 320px){
+    }
+}

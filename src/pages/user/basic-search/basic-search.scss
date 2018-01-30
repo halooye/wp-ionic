@@ -1,0 +1,189 @@
+page-basic-search {
+  .toolbar .searchbar-ios .searchbar-input{
+    background-color: white;
+  }
+  .basic-search-first{
+    .searchbar-ios-cancel{
+      display: none!important;
+    }
+    .searchbar-md-cancel{
+      display: none!important;
+    }
+  }
+  .basic-search-last{
+    .searchbar-ios-cancel{
+      display: block!important;
+    }
+    .searchbar-md-cancel{
+      display: none!important;
+    }
+  }
+
+  .basic-content{
+    .scroll-content{
+      margin-top: 0!important;
+    }
+    .fixed-content{
+      margin-top: 0!important;
+    }
+  }
+  .basic-item{
+    border-bottom: 2px solid #c7c9cd!important;
+    .item-inner{
+      border-bottom: none!important;
+    }
+  }
+  .basic-head{
+      display: none;
+  }
+  .basic-head2{
+    display: block;
+  }
+  .basic-true{
+    background-color: white!important;
+    .searchbar-input-container{
+      input{
+        background-color: #ededee!important;
+      }
+    }
+  }
+  .basic-false{
+    background-color: #ededee!important;
+  }
+  .basic-back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: transparent;
+    z-index: 9999999;
+  }
+  .searchbar-md .searchbar-input{
+    border-radius: 5px!important;
+    padding: 6px 55px 6px 36px!important;
+  }
+  ion-searchbar{
+    //background-color: #ededee!important;
+    padding-top: 9px!important;
+    padding-bottom: 9px!important;
+    padding-right: 3%!important;
+    input{
+      border: 1px solid #e9e9e9!important;
+      font-size: 1.6rem!important;
+    }
+    .searchbar-search-icon{
+      display: block!important;
+      left: 9px!important;
+      top: 9px!important;
+    }
+
+    .searchbar-ios-cancel{
+      color: #454b5a!important;
+      font-size: 1.4rem!important;
+      margin: 0!important;
+      display: none;
+    }
+    .searchbar-md-cancel{
+      color: #454b5a!important;
+      font-size: 1.4rem!important;
+      margin: 0!important;
+    }
+  }
+  ion-item{
+    padding-left: 5%!important;
+  }
+  .infinite-loading{
+    margin: 0!important;
+  }
+}
+add-hospital-modal{
+  @media screen and (max-width:320px){
+    ion-label{
+      font-size: 12px!important;
+    }
+    ion-input{
+      input{
+        font-size: 12px!important;
+      }
+    }
+  }
+
+  ion-item{
+    padding-left: 6%!important;
+    padding-right: 6%!important;
+  }
+  ion-label{
+    color: #454b5a!important;
+    font-weight: 600!important;
+    width: 24%!important;
+    min-width: 24%!important;
+    flex: 0 0 24%!important;
+    -webkit-flex: 0 0 24%!important;
+    line-height: 1.6!important;
+    margin-right: 1rem!important;
+    font-size: 14px;
+  }
+  ion-input{
+    input{
+      font-size: 14px;
+    }
+    .text-input-md{
+      margin-left: 16px!important;
+    }
+  }
+  .main-view{
+    background: transparent;
+  }
+  .overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: .5;
+    background-color: #333;
+  }
+  .modal_content {
+    position: absolute;
+    border-radius: 1.5rem;
+    top: 15%;
+    left: 0;
+    right: 0;
+    width: 90%;
+    z-index: 100;
+    margin: 0 auto;
+    background: white;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    overflow: hidden;
+  }
+  .basic-multi{
+    .multi-picker-text, .multi-picker-placeholder{
+      font-size: 14px;
+    }
+  }
+
+  // 输入框下划线
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+      border-bottom:0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+  .item-md.item-input.item-input-has-focus .item-inner,
+  .item-md.item-input.input-has-focus .item-inner {
+      border-bottom:0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+  .list-md .item-input.item-input-has-focus:last-child,
+  .list-md .item-input.input-has-focus:last-child {
+      border-bottom:0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+}

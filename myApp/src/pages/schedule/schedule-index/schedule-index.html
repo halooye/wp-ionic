@@ -1,0 +1,181 @@
+<!--
+  约诊日程首页
+-->
+<ion-header>
+
+    <ion-navbar no-border-bottom>
+        <ion-buttons end>
+            <div class="closure box-shadow" color="dark" tappable (click)="closure()">紧急停诊</div>
+        </ion-buttons>
+        <ion-title>约诊日程</ion-title>
+    </ion-navbar>
+
+    <div class="calendar-header">
+        <div class="calendar-title" [ngClass]="{'isCalendar': isCalendar}">
+            <span class="calendar-month">{{calendarWeekTitleCurrent}}</span>
+            <span class="today" (tap)="toDayCurrentWeek(calendarData[0].toDay)" *ngIf="isToDay">今日</span>
+        </div>
+
+        <div class="calendar-title" [ngClass]="{'isCalendarMore': isCalendarMore}">
+            <span class="swiper-button-prev"></span>
+            <span class="calendar-month">{{calendarTitleCurrent}}</span>
+            <span class="swiper-button-next"></span>
+            <span class="today" (tap)="toDayCurrent(calendarData[0].toDay)" *ngIf="isToDay">今日</span>
+        </div>
+
+        <div class="calendar-week">
+            <span>日</span>
+            <span>一</span>
+            <span>二</span>
+            <span>三</span>
+            <span>四</span>
+            <span>五</span>
+            <span>六</span>
+        </div>
+
+        <div class="pageWeekSwiper" [ngClass]="{'isCalendar': isCalendar}">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let date of calendarWeekhData; let i=index;">
+                        <div class="calendar-ul">
+                            <div class="calendar-li" *ngFor="let a of date.content" [ngClass]="{'currentMonth': a.currentMonth, 'otherMonth': a.otherMonth, 'currentDay': a.currentDay}" (tap)="toDayData(a.timeId, calendarTitle[0].toDay)">
+                                <span [ngClass]="a.timeId == currentChecked ? 'currentChecked':''">
+                                    {{a.day}}
+                                    <i class="referral" *ngIf="a.referral"></i>
+                                    <i class="business" *ngIf="a.business"></i>
+                                    <i class="business-referral" *ngIf="a.business && a.referral">
+                                        <b></b>
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="pageMonthSlides" [ngClass]="{'isCalendarMore': isCalendarMore}">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" *ngFor="let date of calendarData; let i=index;">
+                        <div class="calendar-ul" *ngFor="let day of date.list">
+                            <div class="calendar-li" *ngFor="let a of day.content" [ngClass]="{'currentMonth': a.currentMonth, 'otherMonth': a.otherMonth, 'currentDay': a.currentDay}" (tap)="toDayData(a.timeId, date.toDay)">
+                                <span [ngClass]="a.timeId == currentChecked ? 'currentChecked':''">
+                                    {{a.day}}
+                                    <i class="referral" *ngIf="a.referral"></i>
+                                    <i class="business" *ngIf="a.business"></i>
+                                    <i class="business-referral" *ngIf="a.business && a.referral">
+                                        <b></b>
+                                    </i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="calendar-arrow" (tap)="arrowSwitch()">
+            <ion-icon [name]="arrow"></ion-icon>
+        </div>
+
+        <ion-row class="header-tab" text-center>
+            <ion-col col-6 [ngClass]="{'active-tab': index == 0}">
+                <i class="business"></i><span class="businessBorder" (click)="goToSlide(0)">我的接诊</span>
+            </ion-col>
+            <ion-col col-6 [ngClass]="{'active-tab': index == 1 || index == 2}">
+                <i class="referral"></i><span  class="referralBorder" (click)="goToSlide(1)">我的转诊</span>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-header>
+
+<ion-content>
+    <ion-slides (ionSlideDidChange)="slideChanged()" class="claendar-list">
+        <ion-slide>
+            <ion-list>
+                <button ion-item class="partner-item" *ngFor="let item of list; let i = index; let last = last" class="schedule-button">
+                    <h2 class="schedule-title">
+                        <span>接诊人：{{item.refDoctorName}}</span>
+                        <span class="schedule-gray schedule-overflow">{{item.refHospital}}</span>
+                        <span *ngIf="item.state=='0'" class="schedule-state">已结束</span>
+                        <span *ngIf="item.state=='1'" class="schedule-state">待看诊</span>
+                    </h2>
+                    <ion-thumbnail item-start>
+                        <img class="box-shadow" src="{{imgUrl}}{{item.faceimage}}" *ngIf="item.faceimage">
+                        <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!item.faceimage">
+                    </ion-thumbnail>
+                    <h4 class="schedule-overflow">
+                        患者：{{item.patientName}}&nbsp;{{item.age}}岁(<span *ngIf="item.sex == true">男</span><span *ngIf="item.sex == false">女</span>)<br>
+                        看诊时间：{{currentChecked}}<br>
+                        医院：{{item.hospital}}<br>
+                        地址：{{item.address}}
+                    </h4>
+                    <div tappable (click)="goDetail()" item-end text-center class="schedule-click">
+                        <ion-icon name="jilu"></ion-icon>
+                        <h4>约诊详情</h4>
+                    </div>
+                </button>
+            </ion-list>
+
+        </ion-slide>
+
+        <ion-slide>
+            <div class="no-data">
+                <p>本日没有转诊哦~</p>
+                <img src="assets/imgs/no-data.png">
+            </div>
+
+<!-- <button ion-item (click)="init()">初始化</button>
+<button ion-item (click)="getRegistrationID()">获取ID</button>
+<button ion-item (click)="isPushStopped()">推送是否停止</button>
+<button ion-item (click)="stopPush()">停止推送</button>
+<button ion-item (click)="resumePush()">恢复推送</button>
+<button ion-item (click)="setAlias()">
+设置别名
+<ion-spinner *ngIf="_hasInStack('setAlias')" item-end name="crescent"></ion-spinner>
+</button>
+<button ion-item (click)="deleteAlias()">
+删除别名
+<ion-spinner *ngIf="_hasInStack('deleteAlias')" item-end name="crescent"></ion-spinner>
+</button>
+<button ion-item (click)="getAlias()">
+获取别名
+<ion-spinner *ngIf="_hasInStack('getAlias')" item-end name="crescent"></ion-spinner>
+</button>
+<button ion-item (click)="setTags()">
+设置 Tags
+<ion-spinner *ngIf="_hasInStack('setTags')" item-end name="crescent"></ion-spinner>
+</button>
+<button ion-item (click)="addTags()">
+添加 Tags
+<ion-spinner *ngIf="_hasInStack('addTags')" item-end name="crescent"></ion-spinner>
+</button>
+<button ion-item (click)="getAllTags()">
+获取当前绑定的所有 Tags
+<ion-spinner *ngIf="_hasInStack('getAllTags')" item-end name="crescent"></ion-spinner>
+</button>
+<button ion-item (click)="cleanTags()">
+清除所有标签 Tags
+<ion-spinner *ngIf="_hasInStack('cleanTags')" item-end name="crescent"></ion-spinner>
+</button>
+
+<div style="background: #fddd9d;
+          color: #946902;
+          padding: 4px 16px;
+          border-radius: 6px;
+          margin-top: 16px;">
+<pre>{{log}}</pre>
+</div>
+
+<ion-fab right bottom>
+<button ion-fab color="light" (click)="_log = ''">
+  <ion-icon name="md-trash"></ion-icon>
+</button>
+</ion-fab> -->
+
+
+        </ion-slide>
+
+    </ion-slides>
+</ion-content>

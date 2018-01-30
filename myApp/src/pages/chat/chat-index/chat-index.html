@@ -1,0 +1,68 @@
+<!--
+  约诊对话首页
+-->
+<ion-header>
+    <ion-navbar>
+        <ion-title>约诊对话</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="isOpenClinic">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="刷新中...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <ion-list>
+      <span class="icon-A0"></span>
+        <ion-item-sliding *ngFor="let item of list;let i =index" (ionDrag)="ondrag($event,item)" [ngSwitch]="item.chatType" #slidingItem>
+          <!--聊天记录-->
+            <button ion-item  (click)="goChat(item)" *ngSwitchCase="'chat'">
+              <div class="placeholder"></div>
+              <ion-avatar item-start class="chat-src">
+                <img src="{{imgUrl}}{{item.headImg}}" *ngIf="item.headImg">
+                <img src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!item.headImg">
+              </ion-avatar>
+              <h2><b>{{item.senderName}}</b>{{item.introInfo}}</h2>
+              <h4 ion-text color="gray" class="chat-over" *ngIf="item.content != ''">{{item.content}}</h4>
+              <h4 ion-text color="gray" class="chat-over" *ngIf="item.content == ''">&nbsp;</h4>
+              <div item-end class="chat-text">
+                <div class="chat-top">{{item.lastTime}}</div>
+                <div class="chat-bottom" *ngIf="item.msgCount && item.msgCount<=99">{{item.msgCount}}</div>
+                <div class="chat-bottom" *ngIf="item.msgCount && item.msgCount>99" style="width: 2.8rem;border-radius: 40%">99+</div>
+                <div class="chat-null" *ngIf="!item.msgCount"></div>
+              </div>
+            </button>
+            <ion-item-options side="right" class="chat-right" style="width: 61px" *ngSwitchCase="'chat'">
+              <button ion-button icon-only (click)="delete(item,i)" class="chat-button">
+                <ion-icon name="trash" ></ion-icon>
+              </button>
+            </ion-item-options>
+
+
+            <!--申请邀请提示-->
+             <button ion-item (click)="goConnect(item)" *ngSwitchCase="'connection'">
+               <div class="placeholder"></div>
+               <ion-avatar item-start class="chat-src">
+                 <img src="assets/imgs/addman.png">
+               </ion-avatar>
+               <h2><b>新的申请/邀请</b></h2>
+               <h4 ion-text color="gray" class="chat-over">您有{{connectCount}}条申请/邀请待处理</h4>
+               <div item-end class="chat-text">
+                 <div class="chat-top">{{item.lastTime}}</div>
+                 <div class="chat-bottom" *ngIf="item.msgCount && item.msgCount<=99">{{item.msgCount}}</div>
+                 <div class="chat-bottom" *ngIf="item.msgCount && item.msgCount>99" style="width: 2.8rem;border-radius: 35%">99+</div>
+                 <div class="chat-null" *ngIf="!item.msgCount"></div>
+               </div>
+               <div class="clear"></div>
+             </button>
+
+
+        </ion-item-sliding>
+
+
+    </ion-list>
+</ion-content>

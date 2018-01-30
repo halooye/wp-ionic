@@ -1,0 +1,13 @@
+{
+  "name": "白色星球",
+  "short_name": "白色星球",
+  "start_url": "index.html",
+  "display": "standalone",
+  "icons": [{
+    "src": "assets/imgs/logo.png",
+    "sizes": "512x512",
+    "type": "image/png"
+  }],
+  "background_color": "#454b5a",
+  "theme_color": "#454b5a"
+}

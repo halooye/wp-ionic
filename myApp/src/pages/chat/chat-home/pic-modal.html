@@ -1,0 +1,22 @@
+<ion-content>
+  <!--<ion-slides [initialSlide]="initialSlide" zoom="true">-->
+    <!--<ion-slide *ngFor="let item of dataList.photos;let i=index;" style="background-color: black">-->
+        <!--<div class="swiper-zoom-container">-->
+          <!--<img src="{{item.url}}">-->
+        <!--</div>-->
+    <!--</ion-slide>-->
+  <!--</ion-slides>-->
+    <div class="swiper-container" id="chat-pic-swiper">
+      <div class="swiper-wrapper">
+         <div class="swiper-slide" *ngFor="let item of dataList.photos;let i=index;" style="background-color: black">
+           <button ion-button clear icon-only (click)="dismiss()" style="position: absolute;top: 30px;left: 20px;z-index: 9999">
+              <ion-icon name="left" color="white" style="font-size: 1.6rem"></ion-icon>
+           </button>
+           <ion-spinner name="dots" *ngIf="item.isShowSpinner" style="position: absolute;width: 16%;height: 16%;left: 42%;top: 42%"></ion-spinner>
+           <div class="swiper-zoom-container" [hidden]="item.isShowSpinner">
+             <img src="{{item.url}}" (press)="hold(item.url,$event)" set-action="manipulation" (load)="load($event,i)">
+           </div>
+         </div>
+      </div>
+    </div>
+</ion-content>

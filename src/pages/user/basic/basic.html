@@ -1,0 +1,64 @@
+<!--
+  基本信息
+-->
+<div class="basic-back" *ngIf="flag==true"></div>
+<ion-header>
+  <ion-navbar>
+      <ion-title>{{title}}</ion-title>
+      <ion-buttons end *ngIf="isFirst">
+        <button ion-button>
+          <ion-note style="color: black">1-2</ion-note>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content>
+   <h6 style="color: #454b5a;font-weight: 600;line-height: 3;margin-top: 0" [style.padding-top]="isFirst? '0' : '15px'">请选择所在的部门</h6>
+  <div style="width: 90%;display: flex;align-items: center;justify-content: flex-start;-webkit-align-items: center;
+-webkit-justify-content: flex-start;flex-wrap: wrap;-webkit-flex-wrap: wrap;margin: 0 auto">
+    <div style="width: 33.33%" *ngFor="let item of department" margin-bottom >
+      <div (tap)="tapEvent($event,item)"
+           [style.border]="item.isBordered? '1px solid black':'1px solid #c7c9cd'"
+           style="width: 90%;margin: 0 auto;border-radius: 14px;padding-top: 18%;padding-bottom: 12%;box-sizing: border-box;" text-center class="basic-depart">
+        <ion-icon [name]="item.logo" style="font-size: 2.4em;" [style.color]="item.isBordered? 'black':'#c7c9cd'"></ion-icon>
+        <div [style.color]="item.isBordered? 'black':'#c7c9cd'" style="padding-top: 7%">
+          {{item.name}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <ion-list>
+      <ion-item *ngIf="isFirst">
+          <ion-label fixed>姓名</ion-label>
+          <ion-input placeholder="请填写您的真实姓名" name="username" [(ngModel)]="username"></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label fixed>所在医院</ion-label>
+          <ion-input placeholder="请选择您所在的医疗机构" (tap)="selectHospital()" name="hospital" [ngModel]="hospital" disabled=true></ion-input>
+          <ion-icon name="right" item-end style="margin-left: -19px;margin-bottom: 2px;color: #cccccc;width: 10.5px;font-size: 20px"></ion-icon>
+      </ion-item>
+      <ion-item>
+          <ion-label fixed>所在科室</ion-label>
+          <ion-input placeholder="请输入您的科室" name="clinic" [(ngModel)]="clinic" *ngIf="isAdmin"></ion-input>
+          <ion-input placeholder="请选择您的科室" (tap)="selectClinic()" name="clinic" [ngModel]="clinic" *ngIf="!isAdmin" disabled=true></ion-input>
+          <ion-icon name="right" item-end *ngIf="!isAdmin" style="margin-left: -19px;margin-bottom: 2px;color: #cccccc;width: 10.5px;font-size: 20px"></ion-icon>
+      </ion-item>
+      <ion-item>
+          <ion-label fixed>职称</ion-label>
+          <!--<ion-input placeholder="请选择您的职称" (tap)="presentActionSheet()" name="level" [ngModel]="level" *ngIf="!isAdmin" disabled=true></ion-input>-->
+          <ion-multi-picker item-content [multiPickerColumns]="dependentColumns" placeholder="请选择您的职称"  [(ngModel)]="levelId"  #multi  *ngIf="!isAdmin"  columnWidth="100%"
+                            cancelText="取消" doneText="确认" style="border-bottom: 1px solid #cccccc;width: 100%;padding-left: 0;text-indent: 16px" class="basic-multi" (tap)="reqLevel()" (ionChange)="change1()">
+          </ion-multi-picker>
+          <ion-input placeholder="请输入您的职称" name="level" [(ngModel)]="level" *ngIf="isAdmin"></ion-input>
+          <ion-icon name="right" item-end style="margin-left: -19px;margin-bottom: 2px;color: #cccccc;width: 10.5px;font-size: 20px" *ngIf="!isAdmin"></ion-icon>
+      </ion-item>
+      <div text-center class="basic-submit" style="padding-top: 5%">
+        <button ion-button round style="width: 36%;height: 2.8em" color="dark" (tap)="gotoPayment()" *ngIf="isFirst">下一步</button>
+        <button ion-button round style="width: 36%;height: 2.8em" color="dark" (tap)="save()" *ngIf="!isFirst">保存</button>
+      </div>
+  </ion-list>
+  <div text-center padding-top style="color: #a8abb2" class="basic-kefu" *ngIf="isFirst">
+    如您在认证过程中遇到任何问题<br>
+    请联系白色星球客服:021-64225665
+  </div>
+</ion-content>

@@ -1,0 +1,24 @@
+<ion-header>
+</ion-header>
+
+<ion-content padding>
+    <div text-center>
+        <h2><img src="assets/imgs/icon-ying@3x.png" style="width:30%;padding-top:12%;"></h2>
+        <p style="color:#454b5a;padding-bottom:8%;">来，造一个充满氧气的医疗圈</p>
+    </div>
+    <ion-item>
+        <ion-input type="number" [(ngModel)]="params.account" placeholder="请输入您的手机号"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-input type="password" [(ngModel)]="params.password" placeholder="请输入密码"></ion-input>
+    </ion-item>
+    <div text-right>
+        <button ion-button clear (click)="forget()">忘记密码?</button>
+    </div>
+    <ion-row>
+        <button ion-button round color="dark" block [disabled]="!disable" (click)="login()">登录</button>
+    </ion-row>
+    <ion-row margin-top>
+        <button ion-button round color="dark" block outline (click)="register()">注册新用户</button>
+    </ion-row>
+</ion-content>

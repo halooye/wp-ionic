@@ -1,0 +1,181 @@
+
+$bg: url('../assets/imgs/bg@3x.png');
+$border-gray: #e9e9e9;
+
+// IOS
+.toolbar-background-md,.toolbar-background-ios{
+    background-image:$bg;
+    background-size:100% auto;
+    background-position:top center;
+}
+.header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios,.header-md .toolbar-background-md, .footer-md .toolbar-background-md{
+    border-style: solid;
+    border-color: $border-gray;
+}
+
+.tabs-ios .tabbar,.tabs-md .tabbar{
+    background-image:$bg;
+    background-size:100% auto;
+    background-position:bottom center;
+    border-top:1px solid $border-gray;
+}
+
+.list-ios .item-block .item-inner,.list-md .item-block .item-inner{
+    border-bottom: 1px solid color($colors,graybg);
+}
+
+.list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+    border:0;
+}
+
+.list-ios,.list-md{
+    margin: -1px 0 10px;
+}
+
+
+.item-ios h2,.item-md h2{
+    font-size:1.6rem;
+    color:color($colors,dark)
+}
+.item-ios h3,.item-md h3{
+    font-size:1.5rem;
+}
+.item-ios h5,.item-md ion-avatar{
+    min-width: 45px;
+    min-height: 45px;
+}
+.item-ios ion-avatar ion-img, .item-ios ion-avatar img,.item-md ion-avatar ion-img, .item-md ion-avatar img{
+    width: 45px;
+    height: 45px;
+}
+.item-ios .item-button,.item-md .item-button{
+    font-size:1.4rem;
+}
+.list-ios > .item-block:first-child,.list-md > .item-block:first-child{
+    border:0;
+}
+// Android
+.header-md:after, .tabs-md[tabsPlacement="top"] > .tabbar:after, .footer-md::before, .tabs-md[tabsPlacement="bottom"] > .tabbar:before{background-image:none;}
+.header-md .toolbar-md:last-child .toolbar-background-md{border-width: 0 0 1px;}
+
+.item-ios,.item-md{
+    color: color($colors, dark);
+}
+
+.basic-notice{
+    text-align: center;
+}
+
+
+.box-shadow{
+    -webkit-box-shadow:0 2px 8px rgba(0, 0, 0, 0.3);
+    box-shadow:0 2px 8px rgba(0, 0, 0, 0.3);
+    background:#e9e9e9;
+}
+
+.placeholder{
+    position:absolute;width:100%;height:100%;top:0;left:16px;border-bottom:1px solid #e9e9e9;
+}
+
+
+.alert-ios .alert-message, .alert-ios .alert-input-group{
+    text-align:left;
+}
+
+
+//picker
+ion-picker-cmp{
+  ion-backdrop{
+    //background:none;
+  }
+  .picker-wrapper{
+    height: 33% !important;
+    .picker-toolbar{
+      border-bottom: 1px solid #c8c7cc!important;
+    }
+    .picker-above-highlight, .picker-below-highlight{
+      display: block!important;
+    }
+    .picker-above-highlight{
+      border-bottom: 1px solid #c8c7cc!important;
+    }
+    .picker-below-highlight{
+      border-top: 1px solid #c8c7cc!important;
+    }
+    .picker-opts{
+      .picker-opt{
+        height: 3.6rem;
+        font-size: 18px;
+        color: #000;
+      }
+    }
+    .picker-button{
+      height: 100%!important;
+    }
+    .picker-toolbar-button{
+      text-align: right!important;
+      width: 50%!important;
+      button{
+        color: #454b5a;
+      }
+    }
+    .picker-toolbar-multi-picker-cancel{
+      text-align: left!important;
+    }
+  }
+}
+@media screen and (max-width:320px){
+   ion-picker-cmp{
+     .picker-wrapper{
+       .picker-opts{
+         .picker-opt{
+           height: 3.2rem;
+           font-size: 15px;
+         }
+       }
+     }
+   }
+}
+
+
+::-webkit-scrollbar {   //隐藏滚动条
+  display: none !important;
+}
+
+
+// 输入框下划线
+.item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+    border-bottom: 1px solid #dedede;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.item-md.item-input.item-input-has-focus .item-inner,
+.item-md.item-input.input-has-focus .item-inner {
+    border-bottom: 1px solid #dedede;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.list-md .item-input.item-input-has-focus:last-child,
+.list-md .item-input.input-has-focus:last-child {
+    border-bottom: 1px solid #dedede;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+
+.subtitle{
+    text-align: left;
+    color:#acacac;
+    padding-top:2px;
+    line-height:2.2;
+    font-size:1.4rem;
+    background:color($colors, graybg);
+    border-bottom: 1px solid #d9d9d9;
+}
+
+
+.content-ios, .content-md{
+    color: color($colors, dark);
+}

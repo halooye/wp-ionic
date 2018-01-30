@@ -1,0 +1,184 @@
+<!--
+  我的诊所首页
+-->
+
+<ion-header>
+    <ion-navbar [ngStyle]="{'display': isSlidesHead ? 'flex' : 'none' }">
+        <ion-buttons end>
+            <button ion-button icon-only color="dark" (click)="system()">
+                <ion-icon name="settings"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>我的诊所</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<!-- 未开通诊所 -->
+<ion-content *ngIf="!isOpenClinic" class="slides">
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="assets/imgs/slides-01@3x.png"/>
+            </div>
+            <div class="swiper-slide">
+                <img src="assets/imgs/slides-02@3x.png"/>
+            </div>
+            <div class="swiper-slide">
+                <img src="assets/imgs/slides-03@3x.png"/>
+            </div>
+        </div>
+    </div>
+    <button ion-button block color="dark" (click)="basicBtn()">开办我的诊所</button>
+</ion-content>
+
+<!-- 已开通诊所 -->
+<ion-content *ngIf="isOpenClinic">
+
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+          pullingIcon="arrow-dropdown"
+          pullingText="下拉刷新"
+          refreshingSpinner="circles"
+          refreshingText="刷新中...">
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <div class="head">
+        <img class="clinic-bg" src="assets/imgs/head@2x.png">
+        <ion-icon class="settings" name="settings" tappable (click)="system()"></ion-icon>
+        <div class="head-title">
+            <img src="assets/imgs/top-clinic@2x.png">
+            <div class="edit" ion-text color="white">
+                {{data.name}} <ion-icon name="edit" tappable (click)="editClinicName()"></ion-icon>
+                <span *ngIf="openStatus">营业 {{data.businessDay}}天</span>
+                <span *ngIf="!openStatus">歇业中</span>
+            </div>
+        </div>
+    </div>
+
+    <ion-list style="padding-bottom:8px;">
+        <ion-card style="margin:-40px 0 0 16px;width:calc(100% - 32px);">
+            <ion-list>
+                <ion-item>
+                    <ion-avatar item-start>
+                        <img class="box-shadow" src="{{imgUrl}}{{dataDoctor.faceImage}}" *ngIf="dataDoctor.faceImage" tappable (click)="setting()">
+                        <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!dataDoctor.faceImage" tappable (click)="setting()">
+                    </ion-avatar>
+                    <h2><b>{{dataDoctor.name}}</b></h2>
+                    <h3 ion-text color="gray"><b>{{dataDoctor.title}} | {{dataDoctor.departmentFunctionName}}</b></h3>
+                    <h4 ion-text color="gray">{{dataDoctor.hospital}}</h4>
+                    <div class="opened" tappable (click)="opened()" *ngIf="openStatus">
+                        <img src="assets/imgs/off@3x.png">
+                    </div>
+                    <div class="opened" tappable (click)="stopOpened()" *ngIf="!openStatus">
+                        <img src="assets/imgs/on@3x.png">
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+        <!-- 未认证  0-->
+        <div tappable (click)="identity(dataDoctor.identifyStatus, dataDoctor.name, dataDoctor.departmentCode, dataDoctor.identifyRemarks)" *ngIf="dataDoctor.identifyStatus == 0" class="error-msg" margin-top margin-left margin-right><ion-icon name="alert"></ion-icon> 您还未实名认证，认证后可转接诊</div>
+        <!-- 认证中 1-->
+        <div tappable (click)="identity(dataDoctor.identifyStatus, dataDoctor.name, dataDoctor.departmentCode, dataDoctor.identifyRemarks)" *ngIf="dataDoctor.identifyStatus == 1" class="error-msg" margin-top margin-left margin-right><ion-icon name="alert"></ion-icon> 您的认证信息已提交, 请等待审核...</div>
+        <!-- 认证失败 3-->
+        <div tappable (click)="identity(dataDoctor.identifyStatus, dataDoctor.name, dataDoctor.departmentCode, dataDoctor.identifyRemarks)" *ngIf="dataDoctor.identifyStatus == 3" class="error-msg" margin-top margin-left margin-right><ion-icon name="alert"></ion-icon> 您的实名未通过, 点击重新认证</div>
+        <!-- 认证成功 2 不显示-->
+
+        <div class="title" *ngIf="dataDoctor.identifyStatus != 2"><span>诊所理念</span></div>
+        <div class="title" style="margin-top:8px;" *ngIf="dataDoctor.identifyStatus == 2"><span>诊所理念</span></div>
+        <div class="aboutus" tappable (click)="editAbout()">
+            {{aboutus}}<ion-icon name="edit"></ion-icon>
+        </div>
+    </ion-list>
+
+    <ion-list>
+        <div class="title"><span>诊所管理</span></div>
+        <ion-grid class="clinic-manage" text-center>
+            <ion-row>
+                <ion-col col-3 tappable (click)="invitePatient(data.doctor.identifyStatus, data.doctor.name, data.doctor.departmentCode)" class="active">
+                    <ion-icon name="invite"></ion-icon>
+                    <span>邀请患者</span>
+                </ion-col>
+                <ion-col col-3 tappable (click)="appointment()">
+                    <ion-icon name="jilu"></ion-icon>
+                    <span>约诊记录</span>
+                </ion-col>
+                <ion-col col-3 tappable (click)="earnings()">
+                    <ion-icon name="money"></ion-icon>
+                    <span>诊所收入</span>
+                </ion-col>
+                <ion-col col-3 tappable (click)="patient()">
+                    <ion-icon name="huanzhe"></ion-icon>
+                    <span>诊所患者</span>
+                </ion-col>
+                <ion-col col-3 tappable (click)="invitePartner()" class="active">
+                    <ion-icon name="yisheng"></ion-icon>
+                    <span>邀请合伙人</span>
+                </ion-col>
+                <ion-col col-3 tappable (click)="statistics()">
+                    <ion-icon name="tongji"></ion-icon>
+                    <span>数据统计</span>
+                </ion-col>
+                <ion-col col-3 tappable (click)="setting()">
+                    <ion-icon name="bianji"></ion-icon>
+                    <span>编辑资料</span>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+    </ion-list>
+
+    <ion-list>
+        <div class="title"><span>诊所合伙人</span> <i>({{doctorsCount}}人)</i></div>
+
+        <div class="department" *ngIf="dlist">
+            <ion-row>
+                <span class="active" tappable (click)="viewPartner('')">全部科室({{doctorsCount}})</span>
+                <span tappable *ngFor="let department of department" (click)="viewPartner(department.departmentFunctionId)">{{department.departmentFunctionName}} ({{department.departmentFunctionCount}})</span>
+            </ion-row>
+        </div>
+        <div class="department" *ngIf="!dlist">
+            <ion-row class="dlist" [ngStyle]="{'max-height': idDheight ? '6rem' : 'none' }">
+                <span class="active" tappable (click)="viewPartner('')">全部科室({{doctorsCount}})</span>
+                <span tappable *ngFor="let department of department" (click)="viewPartner(department.departmentFunctionId)">{{department.departmentFunctionName}} ({{department.departmentFunctionCount}})</span>
+            </ion-row>
+            <div text-center tappable (click)="departmentMore()">
+                <ion-icon [name]="arrow"></ion-icon>
+            </div>
+        </div>
+
+        <button ion-item *ngFor="let doctor of doctors" (click)="doctorHome(doctor.id)">
+            <div class="placeholder"></div>
+            <ion-avatar item-start>
+                <img class="box-shadow" src="{{imgUrl}}{{doctor.faceimage}}" *ngIf="doctor.faceimage">
+                <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!doctor.faceimage">
+            </ion-avatar>
+            <h2>{{doctor.name}} <span ion-text color="gray" style="font-size:1.4rem;">{{doctor.department}} &nbsp;|&nbsp; {{doctor.departmentFunctionName}}</span></h2>
+            <h4 ion-text color="gray">{{doctor.hospital}}</h4>
+            <h4 ion-text color="dark">约诊费：<span ion-text color="lightBlue">{{doctor.treatmentMoney}}</span>元</h4>
+        </button>
+        <ion-item text-center *ngIf="isVp">
+            <button ion-button outline color="lightBlue" (click)="viewPartner('')">查看全部合伙人</button>
+        </ion-item>
+    </ion-list>
+
+    <ion-list *ngIf="isJoinClinicList">
+        <div class="title"><span>我加入的诊所</span> <i>({{clinicCount}}个)</i></div>
+
+        <button ion-item *ngFor="let clinicList of clinicList" (click)="doctorHome(clinicList.doctorId)">
+            <div class="placeholder"></div>
+            <ion-avatar item-start>
+                <img class="box-shadow" src="{{imgUrl}}{{clinicList.faceImage}}" *ngIf="clinicList.faceImage">
+                <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!clinicList.faceImage">
+            </ion-avatar>
+            <h2>{{clinicList.doctorName}} <span ion-text color="gray" style="font-size:1.4rem;">{{clinicList.doctorLevel}} &nbsp;|&nbsp; {{clinicList.departmentFunctionName}}</span></h2>
+            <h4 ion-text color="gray">{{clinicList.hospital}}</h4>
+            <h4 ion-text color="dark">约诊费：<span ion-text color="lightBlue">{{clinicList.treatmentMoney}}</span>元</h4>
+        </button>
+
+        <ion-item text-center *ngIf="isJp">
+            <button ion-button outline color="lightBlue" (click)="viewClinic()">查看全部诊所</button>
+        </ion-item>
+    </ion-list>
+
+</ion-content>

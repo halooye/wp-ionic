@@ -1,0 +1,51 @@
+page-basic-introduce {
+    .content-md,.content-ios{
+        background: color($colors, graybg);
+        color: color($colors, dark);
+    }
+
+   .basic-text{
+       width: 100%;
+       border: none;
+       padding: 15px;
+       font-size: 1.5rem;
+       line-height: 2rem;
+       //word-break: break-all;
+       margin-right: 0;
+       color: #454b5a;
+       background:color($colors, white);
+        font-weight: 500;
+       height: 20rem;
+       //letter-spacing: 1px;
+   }
+
+   @media screen and (max-width:320px){
+       .basic-text{
+         font-size: 1.3rem;
+         line-height: 1.6rem;
+       }
+   }
+
+
+   // 输入框下划线
+   .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+       border-bottom:0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+   }
+
+   .item-md.item-input.item-input-has-focus .item-inner,
+   .item-md.item-input.input-has-focus .item-inner {
+       border-bottom:0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+   }
+
+   .list-md .item-input.item-input-has-focus:last-child,
+   .list-md .item-input.input-has-focus:last-child {
+       border-bottom:0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+   }
+
+}

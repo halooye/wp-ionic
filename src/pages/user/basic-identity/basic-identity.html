@@ -1,0 +1,198 @@
+<!--实名认证-->
+<ion-header>
+    <ion-navbar>
+      <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+  </ion-header>
+<ion-content>
+  <div *ngIf="isOk">
+    <ion-list no-lines>
+      <ion-item>
+        <ion-label color="primary" type="text" style="min-width: 20%;color: #454b5a;font-weight: 600">姓名</ion-label>
+        <ion-input placeholder="请输入您的真实姓名" name="username" [(ngModel)]="username" style="border-bottom: 1px solid #e9e9e9"></ion-input>
+      </ion-item>
+    </ion-list>
+    <ion-list class="basic-list">
+      <ion-item no-lines>
+        <ion-label class="basic-label">
+          <div class="basic-img">
+            <img src="assets/imgs/card-1@3x.png" alt="">
+          </div>
+          <p text-center>上传身份证照片正面</p>
+        </ion-label>
+        <div item-content class="basic-content">
+          <!--<button ion-button class="file" *ngIf="showButton.showButton1">-->
+            <!--<ion-icon ios="ios-camera" md="md-camera"></ion-icon>-->
+            <!--<input type="file" (change)="readFile1($event)" #photo1>-->
+          <!--</button>-->
+          <!--<div *ngIf="!showButton.showButton1" class="file basic-div">-->
+            <!--<input type="file" (change)="readFile1($event)" #photo1>-->
+            <!--<img [src]="src.src1" (load)="load($event)">-->
+          <!--</div>-->
+          <button ion-button  (click)="upload1()" *ngIf="showButton.showButton1">
+            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+          </button>
+          <div *ngIf="!showButton.showButton1" (click)="upload1()" class="basic-div">
+            <ion-spinner name="bubbles" *ngIf="isShowSpinner.isShowSpinner1"></ion-spinner>
+            <img [src]="src.src1"  (load)="load($event,1)" [hidden]="isShowSpinner.isShowSpinner1">
+          </div>
+        </div>
+      </ion-item>
+
+      <!--上传身份证反面-->
+      <ion-item no-lines>
+        <ion-label class="basic-label">
+          <div class="basic-img">
+            <img src="assets/imgs/card-2@3x.png" alt="">
+          </div>
+          <p text-center>上传身份证照片反面</p>
+        </ion-label>
+        <div item-content class="basic-content">
+          <button ion-button  (click)="upload2()" *ngIf="showButton.showButton2">
+            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+          </button>
+          <div *ngIf="!showButton.showButton2" (click)="upload2()" class="basic-div">
+            <ion-spinner name="bubbles" *ngIf="isShowSpinner.isShowSpinner2"></ion-spinner>
+            <img [src]="src.src2"  (load)="load($event,2)" [hidden]="isShowSpinner.isShowSpinner2">
+          </div>
+          <!--<button ion-button class="file" *ngIf="showButton.showButton2">-->
+            <!--<ion-icon ios="ios-camera" md="md-camera"></ion-icon>-->
+            <!--<input type="file" (change)="readFile2($event)" #photo2>-->
+          <!--</button>-->
+          <!--<div *ngIf="!showButton.showButton2" class="file basic-div">-->
+            <!--<input type="file" (change)="readFile2($event)" #photo2>-->
+            <!--<img [src]="src.src2" (load)="load($event)">-->
+          <!--</div>-->
+        </div>
+      </ion-item>
+
+
+      <!--上传工作证-->
+      <ion-item no-lines style="height: 120px;margin-top: 15px" *ngIf="isAdmin">
+        <ion-label class="basic-label">
+          <div class="basic-img">
+            <img src="assets/imgs/work_card@3x.png" alt="" style="max-width: 27%">
+          </div>
+          <p text-center>上传工作证(带照片)<br></p>
+          <p text-center>或就职(加盖公章)</p>
+        </ion-label>
+        <div item-content class="basic-content">
+          <button ion-button  (click)="upload3()" *ngIf="showButton.showButton3">
+            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+          </button>
+          <div *ngIf="!showButton.showButton3" (click)="upload3()" class="basic-div">
+            <ion-spinner name="bubbles" *ngIf="isShowSpinner.isShowSpinner3"></ion-spinner>
+            <img [src]="src.src3"  (load)="load($event,3)" [hidden]="isShowSpinner.isShowSpinner3">
+          </div>
+          <!--<button ion-button class="file" *ngIf="showButton.showButton3">-->
+            <!--<ion-icon ios="ios-camera" md="md-camera"></ion-icon>-->
+            <!--<input type="file" (change)="readFile3($event)" #photo3>-->
+          <!--</button>-->
+          <!--<div *ngIf="!showButton.showButton3" class="file basic-div">-->
+            <!--<input type="file" (change)="readFile3($event)" #photo3>-->
+            <!--<img [src]="src.src3" (load)="load($event)">-->
+          <!--</div>-->
+        </div>
+      </ion-item>
+
+
+      <!--上传医师资格证第一页-->
+      <ion-item no-lines style="margin-top: 15px">
+        <ion-label class="basic-label">
+          <div class="basic-img">
+            <img src="assets/imgs/card-3@3x.png" alt="">
+          </div>
+          <p text-center>上传医师资格证</p>
+          <p text-center>照片第一页</p>
+        </ion-label>
+        <div item-content class="basic-content" #div4>
+          <button ion-button  (click)="upload4()" *ngIf="showButton.showButton4">
+            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+          </button>
+          <div *ngIf="!showButton.showButton4" (click)="upload4()" class="basic-div">
+            <ion-spinner name="bubbles" *ngIf="isShowSpinner.isShowSpinner4"></ion-spinner>
+            <img [src]="src.src4"  (load)="load($event,4)" [hidden]="isShowSpinner.isShowSpinner4">
+          </div>
+          <!--<button ion-button class="file" *ngIf="showButton.showButton4">-->
+            <!--<ion-icon ios="ios-camera" md="md-camera"></ion-icon>-->
+            <!--<input type="file" (change)="readFile4($event)" #photo4>-->
+          <!--</button>-->
+          <!--<div *ngIf="!showButton.showButton4" class="file basic-div">-->
+            <!--<input type="file" (change)="readFile4($event)" #photo4>-->
+            <!--<img [src]="src.src4" (load)="load($event)">-->
+          <!--</div>-->
+        </div>
+      </ion-item>
+
+
+      <!--上传医师资格证第二页-->
+      <ion-item no-lines>
+        <ion-label class="basic-label" >
+          <div class="basic-img">
+            <img src="assets/imgs/card-4@3x.png" alt="">
+          </div>
+          <p text-center>上传医师资格证</p>
+          <p text-center>照片第二页</p>
+        </ion-label>
+        <div item-content class="basic-content" #div5>
+          <button ion-button  (click)="upload5()" *ngIf="showButton.showButton5">
+            <ion-icon ios="ios-camera" md="md-camera"></ion-icon>
+          </button>
+          <div *ngIf="!showButton.showButton5" (click)="upload5()" class="basic-div">
+            <ion-spinner name="bubbles" *ngIf="isShowSpinner.isShowSpinner5"></ion-spinner>
+            <img [src]="src.src5"  (load)="load($event,5)" [hidden]="isShowSpinner.isShowSpinner5">
+          </div>
+          <!--<button ion-button class="file" *ngIf="showButton.showButton5">-->
+            <!--<ion-icon ios="ios-camera" md="md-camera"></ion-icon>-->
+            <!--<input type="file" (change)="readFile5($event)" #photo5>-->
+          <!--</button>-->
+          <!--<div *ngIf="!showButton.showButton5" class="file basic-div">-->
+            <!--<input type="file" (change)="readFile5($event)" #photo5>-->
+            <!--<img [src]="src.src5" (load)="load($event)">-->
+          <!--</div>-->
+        </div>
+      </ion-item>
+    </ion-list>
+    <div text-center style="padding-top: 10px">
+      <button ion-button round style="width: 50%;background-color: #454b5a" (click)="submit()">提交</button>
+    </div>
+    <div text-center  style="color: #a8abb2;padding-top: 15px">
+      如果您在认证过程中遇到任何问题<br>
+      请联系白色星球客服:021-64225665
+    </div>
+  </div>
+  <!--认证成功-->
+  <div text-center *ngIf="state == '2' && !isOk">
+    <img src="assets/imgs/pass.png" style="display: block;width: 60%;margin: 0 auto;padding-top: 30%">
+    <p style="margin: 0 auto;color: #454b5a;padding-top: 8%;font-weight: 600" text-center>实名认证通过，快去转接诊吧</p>
+  </div>
+   <!--认证失败-->
+  <div text-center *ngIf="state == '3' && !isOk" style="padding-top: 13%">
+    <ion-icon name="kulian" style="font-size: 5rem;color: #454b5a;margin-bottom: 20px"></ion-icon>
+    <div style="box-shadow: 0 0 8px #e8e8e8;-webkit-box-shadow: 0 0 8px #e8e8e8;border-top: 5px solid #454b5a;width: 83%;margin:0 auto;padding-bottom: 5.2rem;padding-left: 1rem;padding-right: 1rem;border-radius: .5rem">
+      <h3 style="margin-top: 3rem">非常抱歉,认证失败</h3>
+      <p text-left>失败原因：<br>{{reason}}，有任何疑问可联系下方的客服电话</p>
+    </div>
+    <div text-center style="padding-top: 60px">
+      <button ion-button round style="width: 50%;background-color: #454b5a" (click)="reIdentity()">重新认证</button>
+    </div>
+  </div>
+  <!--认证中-->
+  <div text-center *ngIf="state=='1' && !isOk">
+    <img src="assets/imgs/identity.png" style="display: block;width: 60%;margin: 0 auto;padding-top: 25%">
+    <p style="margin: 0 auto;color: #454b5a;padding-top: 8%;font-weight: 600" text-center>认证材料已经提交请您耐心等待审核通过</p>
+  </div>
+  <div text-center style="color: #a8abb2;padding-bottom: 15px;padding-top: 15px;width: 70%;position: absolute;left: 15%;bottom: 0" *ngIf="state=='1' && !isOk">
+    <div text-center style="color: #454b5a">
+      <span (tap)="reIdentity()">重新认证</span>
+    </div>
+    <div style="padding-top: 30px">
+      如果您在认证过程中遇到任何问题<br>
+      请联系白色星球客服:021-64225665
+    </div>
+  </div>
+  <div text-center style="color: #a8abb2;padding-bottom: 15px;padding-top: 15px;width: 70%;position: absolute;left: 15%;bottom: 0" *ngIf="(state=='3' || state =='2') && !isOk">
+      如果您在认证过程中遇到任何问题<br>
+      请联系白色星球客服:021-64225665
+  </div>
+</ion-content>

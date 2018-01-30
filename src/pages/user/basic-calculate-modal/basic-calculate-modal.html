@@ -1,0 +1,112 @@
+<!--计算器-->
+<ion-content class="main-view">
+  <div class="overlay"></div>
+  <div class="modal_content">
+    <ion-header>
+    <ion-toolbar style="padding-left: 3%;padding-right: 3%">
+    <ion-buttons start>
+    <button ion-button>
+    <ion-icon ios="ios-calculator" md="md-calculator" style="color: #307fa0;font-size: 2rem"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title center text-center style="padding: 0">
+    收益计算器
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button (tap)="dismiss()">
+      <ion-icon ios="ios-close" md="md-close" style="color: #222222;font-size: 3rem"></ion-icon>
+      </button>
+    </ion-buttons>
+    </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list no-lines style="padding:20px 10px  17px 10px">
+        <div style="display: flex;align-items: flex-end;-webkit-align-items: flex-end">
+          <div style="width: 30%;color: #454b5a;font-weight: 600;font-size: 13px" class="basic-please">
+            请输入约诊费
+          </div>
+          <ion-input type="tel" style="color: #307fa0;font-size: 2rem;" name="price"
+                     style="max-width:30%;color: #307fa0;border-bottom: 1px solid #e9e9e9;font-size: 2.8rem;font-weight: 600"
+                     [(ngModel)]="price" (ionChange)="change()"
+                     (keyup)="limitNum()" (keypress)="press($event)" maxlength="5">
+          </ion-input>
+          <div style="color: #454b5a;width:10% ">元</div>
+        </div>
+        <div style="display: flex;align-items: center;-webkit-align-items: center" padding-top>
+          <div style="width: 30%;color: #454b5a;font-weight: 600;font-size: 13px" class="basic-please">
+            选择转诊方式
+          </div>
+          <div style="width: 70%;display: inline-flex;justify-content: space-between;align-items: center;-webkit-align-items: center;-webkit-justify-content: space-between">
+             <span [style.color]="item.tap ? 'white' : '#999999'"
+                   [style.background]="item.tap ? '#454b5a' : '#e9e9e9'"
+                   (tap)="selectMethod(item)" *ngFor="let item of methods">
+              {{item.content}}
+          </span>
+          </div>
+        </div>
+        <div style="display: flex;align-items: center;-webkit-align-items: center" padding-top>
+          <div style="width: 30%;color: #454b5a;font-weight: 600;font-size: 13px" class="basic-please">
+            诊所开业时间
+          </div>
+          <div style="width: 70%;display: inline-flex;align-items: center;-webkit-align-items: center">
+             <span [style.color]="item.tap ? 'white' : '#999999'" style="margin-right: 10px"
+                   [style.background]="item.tap ? '#454b5a' : '#e9e9e9'"
+                   (tap)="selectTime(item)" *ngFor="let item of startTimes">
+              {{item.content}}
+          </span>
+          </div>
+        </div>
+      </ion-list>
+    <ion-grid>
+    <ion-row>
+    <ion-col col-3>
+    <dl>
+    <dt>
+    <h6 style="color: #454b5a;">当前约诊费</h6>
+    <p padding-bottom style="color: #454b5a;">(100%)</p>
+    </dt>
+    <dd style="color: #307fa0;font-weight: 600">{{price}}</dd>
+    </dl>
+    </ion-col>
+    <ion-col col-3>
+    <dl>
+    <dt>
+    <h6 style="color: #454b5a;">您的收益</h6>
+    <p padding-bottom style="color: #454b5a;">({{myPercent}})</p>
+    </dt>
+    <dd style="color: #307fa0;font-weight: 600">{{meGet}}</dd>
+    </dl>
+    </ion-col>
+    <ion-col col-3>
+    <dl>
+    <dt>
+    <h6 style="color: #454b5a;">同行收益</h6>
+    <p padding-bottom style="color: #454b5a;">({{otherPercent}})</p>
+    </dt>
+    <dd style="color: #454b5a;;font-weight: 600">{{otherGet}}</dd>
+    </dl>
+    </ion-col>
+    <ion-col col-3>
+    <dl>
+    <dt>
+    <h6 style="color: #454b5a;">平台收益</h6>
+    <p padding-bottom style="color: #454b5a;">({{ourPercent}})</p>
+    </dt>
+    <dd style="color: #454b5a;;font-weight: 600">{{weGet}}</dd>
+    </dl>
+    </ion-col>
+    <p style="margin-top: 0;padding: 0 5px;font-weight: 600;color: #454b5a">如果一天转诊3次，月收入可达<strong style="color: #307fa0;font-size: 2.8rem">{{totalGet}}</strong>元!</p>
+    </ion-row>
+    </ion-grid>
+    <ion-grid>
+    <ion-row>
+    <div style="padding-top: 3%;font-size: 1rem;" class="calculate-notice">
+    <p style="color: #454b5a;margin-top: 0;padding: 0 5px;margin-bottom: 6px">温馨提示:</p>
+    <p style="margin-top: 0;padding: 0 5px;color: #747883;margin-bottom: 6px">患者接受医生的看诊，并支付医生所设定的费用，这就是约诊费。</p>
+    <p style="margin-top: 0;padding: 0 5px;color: #747883;margin-bottom: 6px">诊所开业小于三个月，平台不收取任何费用。</p>
+    </div>
+    </ion-row>
+    </ion-grid>
+    </ion-content>
+  </div>
+</ion-content>

@@ -1,0 +1,81 @@
+page-chat-index {
+    $bg-color: #e9e9e9;
+    .content-md,.content-ios{
+      background:$bg-color;
+    }
+    .chat-src{
+      img{
+        border: 2px solid #e5e5e5;
+      }
+    }
+    .chat-over{
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .chat-text{
+      .chat-top{
+        color:#666666;
+        font-size: 1.2rem;
+        margin-bottom: .8rem
+      }
+      .chat-bottom{
+        background-color: #f44f2a;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        width: 1.8rem;
+        font-size: 1.2rem;
+        height: 1.8rem;
+        line-height: 1.8rem;
+        float: right;
+        vertical-align: middle;
+      }
+      .chat-fail{
+        background-color: #d2d2d2;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        width: 1.5rem;
+        font-size: 1.2rem;
+        line-height: 1.5rem;
+        float: right;
+      }
+      .chat-null{
+        height: 1.6rem;
+      }
+    }
+  .chat-right{
+    .chat-button{
+      background-color: #ef0000;
+      padding-right: 0;
+      width: 100%;
+      border: 0;
+    }
+  }
+  .item-ios[detail-push] .item-inner, button.item-ios:not([detail-none]) .item-inner, a.item-ios:not([detail-none]) .item-inner{
+    background-image:none;
+    padding-right: 8px;
+  }
+  .list-ios ion-item-options{
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+  }
+  .list-md ion-item-options{
+    border-top: 1px solid #e9e9e9;
+    border-bottom: 1px solid #e9e9e9;
+  }
+  .clear{
+    background: none;
+    border: 0;
+    clear: both;
+    float: none;
+    font-size: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+}

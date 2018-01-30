@@ -1,0 +1,23 @@
+
+<!--
+      编辑公共页面
+-->
+
+<ion-header>
+    <ion-navbar>
+        <ion-buttons end>
+            <button ion-button icon-only [disabled]="!disable" (tap)="save()">
+                <ion-note style="color: #454b5a">保存</ion-note>
+            </button>
+        </ion-buttons>
+        <ion-title>{{title}}</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <div style="position: relative">
+        <textarea [(ngModel)]="content" (ngModelChange)="verification()" maxlength="200" cols="21" class="basic-text"
+                  wrap="soft" [placeholder]="placeholder"></textarea>
+        <span style="position: absolute;bottom:15px;right: 30px;color: #686d79">{{count}}/200</span>
+    </div>
+</ion-content>

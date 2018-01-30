@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title center text-center>
+            个人主页编辑
+        </ion-title>
+        <ion-buttons end>
+            <button ion-button (tap)="goHome()">
+                <ion-note style="color: #454b5a;font-size: 1.4rem">我的主页</ion-note>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="bg-color">
+    <div *ngIf="isShow">
+     <ion-list>
+         <button ion-item style="color:#454b5a" (click)="uploadPhoto()">
+            职业头像
+            <ion-avatar item-end>
+                <img class="box-shadow" src="{{faceImages}}" *ngIf="items.faceImage">
+                <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!items.faceImage">
+            </ion-avatar>
+            <!-- <span  item-end style="color: #f44f2a" class="file" *ngIf="faceImage == null">未上传</span> -->
+         </button>
+         <button ion-item style=" color: #454b5a" (tap)="goIntroduce()">
+            个人简介
+            <span item-end style="color: #f44f2a" *ngIf="introduction == null || introduction == ''">未填写</span>
+            <span item-end style="color: #454b5a;width: 20%;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap" *ngIf="introduction != null && introduction !=''">
+               {{introduction}}
+            </span>
+         </button>
+         <button ion-item style=" color: #454b5a" (tap)="goBasic()">
+           医院与职务
+           <span item-end style="color: #f44f2a" *ngIf="!isBasic">
+               未填写
+            </span>
+           <span item-end style="color: #454b5a" *ngIf="isBasic">
+               已填写
+            </span>
+         </button>
+     </ion-list>
+    <ion-list>
+      <button ion-item style=" color: #454b5a" (tap)="goProject()">
+        擅长项目
+        <span item-end style="color: #f44f2a" *ngIf="illnessName[0] == undefined">
+               未填写
+          </span>
+        <span item-end style="color: #454b5a;width: 20%;text-align: right;overflow: hidden;text-overflow: ellipsis;white-space: nowrap" *ngIf="illnessName[0] != undefined">
+               {{illness}}
+          </span>
+      </button>
+    </ion-list>
+    <ion-list>
+      <button ion-item style=" color: #454b5a">
+        门诊信息
+        <span item-end style="color: #f44f2a" *ngIf="outpatientInfo == ''">
+            未认证
+        </span>
+        <span item-end style="color: #454b5a" *ngIf="outpatientInfo != ''">
+            {{outpatientInfo}}
+        </span>
+      </button>
+    </ion-list>
+    <ion-list>
+      <button ion-item style=" color: #454b5a" (tap)="goIdentity()">
+        身份认证
+        <span item-end style="color: #f44f2a" *ngIf="identifyStatus == '0'">
+            未认证
+        </span>
+        <span item-end style="color: #f44f2a" *ngIf="identifyStatus == '1'">
+            认证中
+        </span>
+        <span item-end style="color: #f44f2a" *ngIf="identifyStatus == '3'">
+            认证失败
+        </span>
+        <span item-end style="color: #454b5a" *ngIf="identifyStatus == '2'">
+            认证成功
+        </span>
+      </button>
+    </ion-list>
+  </div>
+</ion-content>

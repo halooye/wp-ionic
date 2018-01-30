@@ -1,0 +1,20 @@
+page-aboutus {
+  .content-ios,.content-md{
+    background-image:$bg;
+    background-size:cover;
+  }
+  .header-ios .toolbar-background-ios, .footer-ios .toolbar-background-ios, .header-md .toolbar-background-md, .footer-md .toolbar-background-md{
+      border-color:#fff;
+  }
+  .basic-img{
+    padding:12% 0;
+    width: 60%;
+    display: block;
+    margin: 0 auto;
+  }
+  a{
+      padding-left:0!important;
+      border-top: 1px solid color($colors, graybg) !important;
+  }
+  .item-inner{padding-left:16px;border:0!important;}
+}

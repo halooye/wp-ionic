@@ -1,0 +1,156 @@
+page-basic {
+  @media screen and (max-width:320px){
+     .basic-depart{
+       padding-top: 10%!important;
+     }
+     ion-label{
+       font-size: 1.4rem!important;
+     }
+      ion-input{
+        input{
+          font-size: 1.4rem!important;
+        }
+      }
+      ion-multi-picker{
+        font-size: 1.4rem!important;
+      }
+      .basic-depart{
+        ion-icon{
+          font-size: 1.8em!important;
+        }
+        div{
+          font-size: 13px!important;
+        }
+      }
+       ion-item{
+         min-height: 3.4rem!important;
+       }
+       .basic-submit{
+         padding-top: 0!important;
+         button{
+           height: 2.2em!important;
+         }
+       }
+       .basic-kefu{
+         padding-top: 10px!important;
+       }
+  }
+  .basic-back{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: transparent;
+    z-index: 9999999;
+  }
+   ion-header{
+     .toolbar-content-md{
+       order: 4!important;
+       -webkit-order:4!important;
+     }
+     ion-navbar{
+       ion-icon{
+         font-size: 2.4rem;
+         margin-left: 20px;
+       }
+     }
+   }
+  ion-content{
+    .scroll-content{
+      padding-left: 5%!important;
+      padding-right: 5%!important;
+      padding-bottom: 5%!important;
+    }
+    h6{
+      margin-bottom: 0;
+    }
+    .grid{
+      padding-bottom: 20px;
+    }
+    ion-list{
+      margin-bottom: 0!important;
+      ion-item{
+        ion-multi-picker{
+          color: black!important;
+          text-indent: 0!important;
+        }
+        padding-left: 0!important;
+        //padding-top: 10px!important;
+        ion-label{
+          color: #454b5a!important;
+          font-weight: 600!important;
+          width: 24%!important;
+          min-width: 24%!important;
+          flex: 0 0 24%!important;
+          -webkit-flex: 0 0 24%!important;
+          line-height: 1.6!important;
+          margin-right: 1rem!important;
+        }
+        ion-input{
+          input{
+            margin:0!important;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 2;
+            color: black!important;
+          }
+        }
+      }
+    }
+    .label-ios + ion-input .text-input, .label-ios + ion-textarea .text-input, .label-ios + .input + .cloned-input{
+      margin-left: 0;
+    }
+    .list-ios > .item-block:first-child{
+      border: none;
+    }
+    .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block{
+      border: none;
+    }
+    .item-md.item-block .item-inner{
+      border: none;
+    }
+    ion-list{
+      font-size: 1.2em;
+      ion-input{
+        border-bottom: 1px solid #cccccc;
+      }
+      ion-label{
+        font-size: 1.6rem;
+      }
+    }
+    .text-input[disabled]{
+      opacity: 1!important;
+    }
+    .list-ios .item-block .item-inner{
+      border: none!important;
+    }
+    .item-ios.item-block .item-inner{
+      border: none!important;
+    }
+  }
+
+
+  // 输入框下划线
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+      border-bottom:0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+  .item-md.item-input.item-input-has-focus .item-inner,
+  .item-md.item-input.input-has-focus .item-inner {
+      border-bottom:0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+  .list-md .item-input.item-input-has-focus:last-child,
+  .list-md .item-input.input-has-focus:last-child {
+      border-bottom:0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+}

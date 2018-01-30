@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="reset.css">
+	<link rel="stylesheet" href="index.css">
+	<script type="text/javascript" src="fit.js"></script>
+</head>
+<body>
+   <div class="index">
+	   <div class="index-register">
+		   <img src="../assets/imgs/invit/logopro02.png" alt="" class="index-head">
+		   <h6 class="index-content"><span>赵东来</span>&nbsp;主任医师邀请您加入TA的诊所</h6>
+		   <input type="tel" placeholder="请输入手机号" class="index-tel" maxlength="11">
+		   <div class="index-password">
+			   <input type="tel" placeholder="请输入验证码" class="index-code" maxlength="4">
+			   <button onclick="settime(this)">获取验证码</button>
+		   </div>
+		   <div class="index-confirm" onclick="confirm()">确认</div>
+	   </div>
+	   <div class="index-member1">
+		   <img src="../assets/imgs/invit/logopro02.png" alt="" class="index-head">
+		   <h6 class="index-content index-msg">您已经是白色星球的用户啦</h6>
+		   <!--<h6 class="index-content">您已加入了&nbsp;<span>赵东来</span>&nbsp;的诊所<br>请等待对方验证</h6>-->
+		   <!--<h6 class="index-content">请您打开白色星球APP，开通诊所后<br>将自动加入<span>赵东来</span>的诊所</h6>-->
+	   </div>
+	   <div class="index-member2">
+		   <div class="index-open">打开白色星球APP</div>
+		   <h6>医疗圈&nbsp;|&nbsp;合伙制&nbsp;|&nbsp;转接诊平台</h6>
+	   </div>
+	   <div class="index-login">
+		   <img src="../assets/imgs/invit/logopro02.png" alt="" class="index-head">
+		   <h6 class="index-content">请输入密码</h6>
+		   <input type="password" placeholder="请输入密码" class="index-hasAccount">
+		   <div class="index-confirm" onclick="registerOk()">确认</div>
+		   <h6>注册成功后，请在白色星球APP直接使用当前手机号登录</h6>
+	   </div>
+   </div>
+   <img src="../assets/imgs/invit/logopro01.png" alt="" class="index-logo">
+   <script src="../assets/app.min.js"></script>
+   <script>
+       Zepto(function($){
+           //获取url参数
+           function getQueryString(name) {
+               var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+               var r = window.location.search.substr(1).match(reg);
+               if (r != null) return unescape(r[2]);
+               return null;
+           }
+           console.log(getQueryString('tel'))
+           var tel = getQueryString('tel')
+           $('.index-tel').val(tel)
+       })
+
+	   //倒计时
+       var countdown=60;
+       function settime(obj) {
+           var $obj = $(obj)
+           var ph = /^1[3|5|7|8|][0-9]{9}$/;
+
+           if ($('.index-tel').val() == '') {
+               toast('请输入手机号',2000)
+               return;
+           }
+
+           if (!(ph.test($('.index-tel').val()))){
+               toast('请输入正确格式的手机号',2000)
+               return;
+           }
+
+           if (countdown == 0) {
+               $obj.attr("disabled",null);
+               $obj.html("免费获取验证码");
+               countdown = 60;
+               return;
+           } else {
+               $obj.attr("disabled", true);
+               $obj.html("重新发送(" + countdown + ")");
+               countdown--;
+           }
+           setTimeout(function() {
+                   settime(obj) }
+               ,2000)
+       }
+
+       //自定义弹框
+       function toast(msg,duration,position){
+           duration=isNaN(duration)?3000:duration;
+           var $div=$('<div>'+msg+'</div>');
+           $('body').append($div);
+           $div.addClass('toast')
+           setTimeout(function() {
+	             $div.remove();
+           }, duration);
+           if(position == 'bottom'){
+               $div.addClass('toast-bottom')
+           }else{
+               $div.addClass('toast-middle')
+           }
+       }
+
+       //点击确认
+       confirm = function () {
+           var ph = /^1[3|5|7|8|][0-9]{9}$/;
+
+           if ($('.index-tel').val() == '') {
+               toast('请输入手机号',1000)
+               return;
+           }
+
+           if (!(ph.test($('.index-tel').val()))){
+               toast('请输入正确格式的手机号',1000)
+               return;
+           }
+
+           if($('.index-code').val() == ''){
+               toast('请输入验证码',1000)
+	           return;
+           }
+
+           var state = 0;
+           $('.index-register').css('display','none')
+           //未注册
+           if(state == 0){
+               $('.index-login').css('display','block')
+	           return;
+           }
+
+           //已注册 自已打开了自已的邀请链接
+           if(state == 1){
+              hasRegister();
+              $('.index-msg').html('您已经是白色星球的用户啦')
+	           return;
+           }
+	       // 已注册 已开通诊所 未加入对方诊所
+           if(state == 2){
+               hasRegister();
+               $('.index-msg').html('您已加入了&nbsp;<span class="index-name">赵东来</span>&nbsp;的诊所<br>请等待对方验证')
+               return;
+           }
+           // 已注册 已开通诊所 已加入对方诊所
+	       if(state == 3){
+               hasRegister()
+               $('.index-msg').html('您已经是&nbsp;<span class="index-name">赵东来</span>&nbsp;的诊所合伙人啦')
+		       return;
+	       }
+	       // 已注册 未开通诊所
+           if(state == 4){
+               hasRegister()
+               $('.index-msg').html('请您打开白色星球APP，开通诊所后<br>将自动加入&nbsp;<span class="index-name">赵东来</span>&nbsp;的诊所')
+           }
+       }
+
+       function hasRegister(){
+           $('.index-member1').css('display','block')
+           $('.index-member2').css('display','block')
+	       $('.index-logo').css('display','none')
+       }
+
+       //注册成功后
+       registerOk = function () {
+           var reg = /(?!^[0-9]+$)(?!^[A-z]+$)(?!^[^A-z0-9]+$)^.{8,16}$/;
+
+           if($('.index-hasAccount').val() == ''){
+               toast('请输入密码',1000)
+	           return;
+           }
+           if(!(reg.test($('.index-hasAccount').val()))){
+               toast('请输入8-16位由数字和字母组合的密码!',1000)
+               return;
+           }
+           toast('注册成功',1000)
+	       hasRegister();
+           $('.index-login').css('display','none')
+           $('.index-msg').html('请您打开白色星球APP，开通诊所后<br>将自动加入&nbsp;<span class="index-name">赵东来</span>&nbsp;的诊所')
+       }
+   </script>
+</body>
+</html>

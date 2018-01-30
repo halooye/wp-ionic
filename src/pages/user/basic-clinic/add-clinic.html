@@ -1,0 +1,19 @@
+<!--新增科室模态框-->
+<ion-content class="main-view">
+  <div class="overlay" (tap)="dismiss()"></div>
+  <div class="basic-content modal_content">
+    <div style="border-radius: 13px">
+      <h4 text-center style="color: #454b5a;font-weight: 600;font-size: 15px">新增科室</h4>
+      <ion-list no-lines style="margin-bottom: 1.6rem">
+        <ion-item>
+          <ion-label fixed style="color: #454b5a;font-weight: 600">所在科室</ion-label>
+          <ion-input placeholder="请输入科室名称" name="clinic" [(ngModel)]="clinic" style="border-bottom: 1px solid #cccccc"></ion-input>
+        </ion-item>
+        <ion-buttons style="width: 84%;margin: 0 auto" padding-top>
+          <button ion-button style="color: #454b5a;background-color: white;border: 1px solid #454b5a;height: 2.4em;margin: 0;border-radius: 4em;width: 45%;margin-right: calc(10% - 4px);" (tap)="dismiss()">取消</button>
+          <button ion-button style="color: white;background-color: #454b5a;border: 1px solid #454b5a;height: 2.4em;margin: 0;border-radius: 4em;width: 45%" (tap)="confirm()">确定</button>
+        </ion-buttons>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

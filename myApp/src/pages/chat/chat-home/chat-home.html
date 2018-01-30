@@ -1,0 +1,179 @@
+<!--
+  Generated template for the ChatHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>
+      <h6 ion-text color="dark" style="margin: 0;font-size: 1.4rem">{{toUser.name}}</h6>
+      <h6 ion-text color="gray" style="font-size: 1.2rem;margin: 0;overflow: hidden;text-overflow: ellipsis;white-space: nowrap" *ngIf="toUser.hospital && toUser.introInfo">{{toUser.hospital}}/{{toUser.introInfo}}</h6>
+    </ion-title>
+  </ion-navbar>
+  <ion-toolbar style="min-height: 0;padding: 0" *ngIf="!enabled">
+    <ion-item text-left style="background-color: #efd198;color:#f44f2a;font-size: 1.4rem;line-height: 2rem;height: 2rem;min-height: 2rem;">
+      <span style="background-color: #f44f2a;width: 1rem;height: 1rem;border-radius: 50%;display: inline-block;margin-right: 1em" item-start></span>医生诊所为歇业状态,请您留言,待其开业后回复您
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content  overflow-scroll="true" (ionScroll)="scrollHandler($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="下拉加载更多"
+      refreshingSpinner="bubbles"
+      [refreshingText]="loadingText">
+    </ion-refresher-content>
+  </ion-refresher>
+  <div class="message-wrap" [style.opacity]="isOpacity ? 0 : 1">
+    <div *ngFor="let msg of msgList;let i = index;let last = last"
+         class="message"
+         [class.left]=" msg.senderId === toUser.id "
+         [class.right]=" msg.senderId === user.id " [ngSwitch]="msg.msgType" [finish-render]="last" (finishEvent)="renderFinish($event)">
+
+      <!--文本消息-->
+      <div *ngSwitchCase="1">
+        <img src="{{imgUrl}}{{user.headImg}}" *ngIf="user.headImg && msg.senderId === user.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+        <img src="{{imgUrl}}{{toUser.headImg}}" *ngIf="toUser.headImg && msg.senderId === toUser.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+        <img src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="(!user.headImg && msg.senderId === user.id) || !toUser.headImg && msg.senderId === toUser.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+        <!--<ion-spinner name="dots" *ngIf="msg.status === 'pending'"></ion-spinner>-->
+        <div class="msg-detail">
+          <div class="msg-info" *ngIf="msg.showTime">
+            <p>{{msg.time}}</p>
+          </div>
+          <div class="msg-content">
+            <span class="triangle"></span>
+            <p class="line-breaker">{{msg.msgContent}}</p>
+          </div>
+        </div>
+      </div>
+
+      <!--图片消息-->
+      <div *ngSwitchCase="2">
+        <img src="{{imgUrl}}{{user.headImg}}" *ngIf="user.headImg && msg.senderId === user.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+        <img src="{{imgUrl}}{{toUser.headImg}}" *ngIf="toUser.headImg && msg.senderId === toUser.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+        <img src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="(!user.headImg && msg.senderId === user.id) || !toUser.headImg && msg.senderId === toUser.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+
+        <div class="msg-detail">
+          <div class="msg-info" *ngIf="msg.showTime">
+            <p>{{msg.time}}</p>
+          </div>
+          <div class="msg-img" style="height: 150px;width:100%;position: relative;overflow: hidden">
+            <ion-spinner name="bubbles" *ngIf="msg.isShowSpinner" style="position: absolute;width: 16%;height: 16%;left: 42%;top: 42%"></ion-spinner>
+            <img tappable src="{{msg.msgImg}}" (click)="openImg(i)" (press)="hold(msg.msgImg,$event)" set-action="manipulation" (error)="hasError(i)" (load)="load($event,i)" [hidden]="msg.isShowSpinner">
+          </div>
+        </div>
+      </div>
+
+
+      <!--电话消息-->
+      <div *ngSwitchCase="3">
+        <img src="{{imgUrl}}{{user.headImg}}" *ngIf="user.headImg && msg.senderId === user.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+        <img src="{{imgUrl}}{{toUser.headImg}}" *ngIf="toUser.headImg && msg.senderId === toUser.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+        <img src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="(!user.headImg && msg.senderId === user.id) || !toUser.headImg && msg.senderId === toUser.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+
+          <div class="msg-detail">
+            <div class="msg-info" *ngIf="msg.showTime">
+              <p>{{msg.time}}</p>
+            </div>
+            <div class="msg-tel">
+              <button ion-button outline class="chat-tel" color="dark" (click)="call(msg.msgContent)">
+                <span class="triangle"></span>
+                <span style="color: #307fa0;font-size: 1.3rem;width: 2.2rem">电话</span>
+                <ion-avatar>
+                  <img src="{{imgUrl}}{{user.headImg}}" *ngIf="user.headImg && msg.senderId === user.id">
+                  <img src="{{imgUrl}}{{toUser.headImg}}" *ngIf="toUser.headImg && msg.senderId === toUser.id">
+                  <img src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="(!user.headImg && msg.senderId === user.id) || (!toUser.headImg && msg.senderId === toUser.id)">
+                </ion-avatar>
+                <span class="tel-direction">
+                  <p ion-text color="dark" *ngIf="msg.senderId === user.id"><b>{{user.name}}</b>&nbsp;{{user.introInfo}}</p>
+                    <p ion-text color="dark" *ngIf="msg.senderId === toUser.id"><b>{{toUser.name}}</b>&nbsp;{{toUser.introInfo}}</p>
+                    <p ion-text color="dark">{{msg.msgContent}}</p>
+                 </span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+       <!--系统消息-->
+        <div *ngSwitchCase="8">
+          <div class="msg-info" *ngIf="msg.showTime" text-center>
+            <p>{{msg.time}}</p>
+          </div>
+           <div class="msg-detail">
+             <div class="chat-service">
+               <p ion-text color="white">
+                 {{msg.msgContent}}
+               </p>
+             </div>
+           </div>
+        </div>
+
+         <!--约诊单卡片-->
+      <div *ngSwitchCase="7">
+        <img src="{{imgUrl}}{{user.headImg}}" *ngIf="user.headImg && msg.senderId === user.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+        <img src="{{imgUrl}}{{toUser.headImg}}" *ngIf="toUser.headImg && msg.senderId === toUser.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+        <img src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="(!user.headImg && msg.senderId === user.id) || !toUser.headImg && msg.senderId === toUser.id"  class="user-img" [style.top]="msg.showTime?'30px' : '10px'" tappable (click)="doctorHome(msg)">
+
+        <div class="msg-detail">
+          <div class="msg-info" *ngIf="msg.showTime">
+            <p>{{msg.time}}</p>
+          </div>
+          <div class="msg-card">
+            <span class="triangle"></span>
+            <div class="card-head">
+                 <ion-icon name="jilu" color="white"></ion-icon>
+                <span ion-text color="white">约诊单</span>
+            </div>
+            <div class="card-body">
+                <div class="msg-cardInfo">
+                  <h3 ion-text color="dark">我向您发起的转诊申请</h3>
+                  <h3 ion-text color="dark">患者：王大锤</h3>
+                  <h3 ion-text color="dark">疑似疾病:系统性红斑狼疮</h3>
+                </div>
+                <ion-item class="card-detail" round>
+                    点击查看详情
+                    <ion-icon name="right" item-end></ion-icon>
+                </ion-item>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      </div>
+  </div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-grid class="chat-button">
+      <ion-row>
+        <ion-col col-3> <button ion-button outline color="dark" class="chat-border" (click)="sendTalk()" [disabled]="!isOpen">常用语</button></ion-col>
+        <ion-col col-3> <button ion-button outline color="dark" class="chat-border" [disabled]="!isOpen">同行名片</button></ion-col>
+        <ion-col col-3><button ion-button outline color="dark" class="chat-border" (click)="sendTel()" [disabled]="!isOpen">发送电话</button></ion-col>
+        <ion-col col-3><button ion-button outline color="dark" class="chat-border" (click)="sendPic()" [disabled]="!isOpen">发送图片</button></ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-item class="chat-input" no-lines>
+      <!--<ion-label>-->
+        <!--常用语-->
+      <!--</ion-label>-->
+      <ion-textarea [(ngModel)]="sendMsg" (resizeHeight)="heightChange($event)" (input)="input()"
+                    (ionFocus)="focus()"  (ionBlur)="blur()"  class="chat-entry" id="chatInput" (keyup)="limitEmotion()"
+                    autoresize="72" rows="1" id="textArea" text-wrap  (resizeChange)="scrolltoBottom2($event)" *ngIf="isOpen">
+      </ion-textarea>
+      <ion-textarea *ngIf="!isOpen" placeholder="当前歇业中，点击开业并聊天"
+                    tappable (click)="openClinic()" class="chat-entry" rows="1" readonly="true">
+      </ion-textarea>
+      <ion-buttons item-end class="chat-buttons">
+        <button ion-button color="white" class="chat-send" (click)="sendMessage()" autoresize="30" [disabled]="!isOpen">
+          发送
+        </button>
+      </ion-buttons>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

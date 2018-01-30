@@ -1,0 +1,36 @@
+<!--
+  注册
+-->
+<ion-header>
+    <ion-navbar>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+    <ion-list no-lines>
+        <ion-item style="background:none;font-weight:bold;" text-center>
+        注册新用户
+        </ion-item>
+    </ion-list>
+    <ion-grid>
+        <ion-item>
+            <ion-input type="number" [(ngModel)]="codeParam.phone" placeholder="请输入您的手机号"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-input type="number" [(ngModel)]="params.verificationCode" placeholder="请输入验证码"></ion-input>
+            <button item-right ion-button clear [disabled]="!verifyCode.disable" (click)="getCode()" style="font-size:1.6rem;margin:0;padding:0;" color="dark">{{verifyCode.verifyCodeTips}}</button>
+        </ion-item>
+        <ion-item>
+            <ion-input type="password" [(ngModel)]="params.password" placeholder="请输入8-16位数字和字母"> </ion-input>
+        </ion-item>
+        <ion-item margin-bottom>
+            <ion-input type="password" [(ngModel)]="params.rePassword" placeholder="请再输入一次密码"> </ion-input>
+        </ion-item>
+        <ion-row margin-top>
+            <button ion-button round color="dark" block [disabled]="!disable" (click)="register()">注册</button>
+        </ion-row>
+        <div margin-top text-center padding-top>
+            注册表示默认同意 <span ion-text color="primary">《用户服务协议》</span>
+        </div>
+    </ion-grid>
+</ion-content>

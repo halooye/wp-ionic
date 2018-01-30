@@ -1,0 +1,160 @@
+<!--
+     诊所主页
+-->
+<ion-header>
+
+  <ion-navbar style="display:none;">
+    <ion-title>诊所主页</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+      pullingIcon="arrow-dropdown"
+      pullingText="下拉刷新"
+      refreshingSpinner="circles"
+      refreshingText="刷新中...">
+    </ion-refresher-content>
+  </ion-refresher>
+
+     <div class="head">
+       <img class="clinic-bg" src="assets/imgs/head@2x.png">
+       <ion-icon class="go-back" name="arrow-back" tappable (click)="goBack()"></ion-icon>
+       <div class="head-title">
+         <img src="assets/imgs/top-clinic@2x.png">
+         <div class="edit" ion-text color="white">
+           {{clinic.name}}
+           <span>营业 {{clinic.businessDay}}天</span>
+         </div>
+       </div>
+     </div>
+
+     <ion-list padding-bottom>
+       <ion-card style="margin:-40px 0 0 16px;width:calc(100% - 32px);">
+         <ion-list>
+           <ion-item>
+             <ion-avatar item-start>
+               <img class="box-shadow" src="{{imgUrl}}{{doctor.faceImage}}" *ngIf="doctor.faceImage">
+               <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!doctor.faceImage">
+             </ion-avatar>
+             <h2>{{doctor.name}}</h2>
+             <h3 ion-text color="gray"><b>{{doctor.title}} | {{doctor.department}}</b></h3>
+             <h4 ion-text color="gray">{{doctor.hospital}}</h4>
+
+             <div class="opened" tappable (click)="opened()" text-center>
+               <ion-icon name="yisheng2"></ion-icon>
+               <div>Ta的主页</div>
+             </div>
+           </ion-item>
+         </ion-list>
+       </ion-card>
+       <div class="title" style="margin-top:8px;"><span>诊所理念</span></div>
+       <div class="aboutus" *ngIf="!clinic.note">
+             医者之与我，不是煎汤换药，不是开单写书，而是仁心，是慈悲、是强烈的信仰，是面对未来生存渴望。
+       </div>
+       <div class="aboutus" *ngIf="clinic.note">
+             {{aboutus}}
+             <span ion-text color="primary" margin-left tappable (click)="viewAll(clinic.note)" *ngIf="viewNote">查看全部</span>
+       </div>
+     </ion-list>
+
+    <ion-list *ngIf="status.isMyPartner || status.isHisPartner">
+        <div class="title"><span>诊所合伙人</span> <i>({{doctorsCount}}人)</i></div>
+
+        <div class="department" *ngIf="dlist">
+        <ion-row>
+        <span class="active" tappable (click)="viewPartner('')">全部科室({{doctorsCount}})</span>
+        <span tappable *ngFor="let department of partner.departmentFunction" (click)="viewPartner(department.departmentFunctionId)">{{department.departmentFunctionName}} ({{department.departmentFunctionCount}})</span>
+        </ion-row>
+        </div>
+        <div class="department" *ngIf="!dlist">
+            <ion-row class="dlist" [ngStyle]="{'max-height': idDheight ? '6rem' : 'none' }">
+                <span class="active" tappable (click)="viewPartner('')">全部科室({{doctorsCount}})</span>
+                <span tappable *ngFor="let department of partner.departmentFunction" (click)="viewPartner(department.departmentFunctionId)">{{department.departmentFunctionName}} ({{department.departmentFunctionCount}})</span>
+            </ion-row>
+            <div text-center tappable (click)="departmentMore()">
+                <ion-icon [name]="arrow"></ion-icon>
+            </div>
+        </div>
+
+        <button ion-item *ngFor="let doctor of partner.doctors" tappable (click)="doctorHome(doctor.id)">
+            <div class="placeholder"></div>
+            <ion-avatar item-start>
+                <img class="box-shadow" src="{{imgUrl}}{{doctor.faceimage}}" *ngIf="doctor.faceimage">
+                <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!doctor.faceimage">
+            </ion-avatar>
+            <h2>{{doctor.name}} <span ion-text color="gray" style="font-size:1.4rem;">{{doctor.department}} &nbsp;|&nbsp; {{doctor.departmentFunctionName}}</span></h2>
+            <h4 ion-text color="gray">{{doctor.hospital}}</h4>
+            <h4 ion-text color="dark">约诊费：<span ion-text color="lightBlue">{{doctor.treatmentMoney}}</span>元</h4>
+        </button>
+        <ion-item text-center *ngIf="isVp">
+            <button ion-button outline color="lightBlue" tappable (click)="viewPartner('')">查看全部合伙人</button>
+        </ion-item>
+    </ion-list>
+
+
+    <ion-list *ngIf="!status.isMyPartner && !status.isHisPartner" tappable (click)="secondPrompt(doctor.name)">
+        <div class="title"><span>诊所合伙人</span> <i>({{doctorsCount}}人)</i></div>
+
+        <div class="department" *ngIf="dlist">
+            <ion-row>
+                <span class="active">全部科室({{doctorsCount}})</span>
+                <span tappable *ngFor="let department of partner.departmentFunction">{{department.departmentFunctionName}} ({{department.departmentFunctionCount}})</span>
+            </ion-row>
+        </div>
+        <div class="department" *ngIf="!dlist">
+            <ion-row class="dlist" [ngStyle]="{'max-height': idDheight ? '6rem' : 'none' }">
+                <span class="active">全部科室({{doctorsCount}})</span>
+                <span tappable *ngFor="let department of partner.departmentFunction">{{department.departmentFunctionName}} ({{department.departmentFunctionCount}})</span>
+            </ion-row>
+            <div text-center>
+                <ion-icon [name]="arrow"></ion-icon>
+            </div>
+        </div>
+
+        <button ion-item *ngFor="let doctor of partner.doctors">
+            <div class="placeholder"></div>
+            <ion-avatar item-start>
+                <img class="box-shadow" src="{{imgUrl}}{{doctor.faceimage}}" *ngIf="doctor.faceimage">
+                <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png" *ngIf="!doctor.faceimage">
+            </ion-avatar>
+            <h2>{{doctor.name}} <span ion-text color="gray" style="font-size:1.4rem;">{{doctor.department}} &nbsp;|&nbsp; {{doctor.departmentFunctionName}}</span></h2>
+            <h4 ion-text color="gray">{{doctor.hospital}}</h4>
+            <h4 ion-text color="dark">约诊费：<span ion-text color="lightBlue">{{doctor.treatmentMoney}}</span>元</h4>
+        </button>
+        <ion-item text-center>
+            <button ion-button outline color="lightBlue">点击下方申请或邀请按钮与 {{doctor.name}} 成为合伙人</button>
+        </ion-item>
+    </ion-list>
+
+
+</ion-content>
+
+<ion-footer style="padding:0;">
+    <ion-toolbar style="padding:0;">
+        <ion-row class="sendMsg" text-center>
+            <ion-col col-4 style="line-height:3rem;" tappable (click)="sendMsg()">
+                发消息
+            </ion-col>
+            <ion-col col-4 *ngIf="!status.isHisPartner" tappable (click)="applyPartner(doctor.id, clinic.name)">
+                {{isApply ? '申请' : '已申请'}}
+                <span>{{isApply ? '加入Ta的诊所' : '已申请加入Ta的诊所'}}</span>
+            </ion-col>
+            <ion-col col-4 *ngIf="status.isHisPartner">
+                已加入
+                <span>Ta的诊所</span>
+            </ion-col>
+            <ion-col col-4 *ngIf="!status.isMyPartner" tappable (click)="invitPartner(doctor.id, clinic.name)">
+                {{isInvit ? '邀请' : '已邀请'}}
+                <span>{{isInvit ? '加入我的诊所' : '已邀请加入我的诊所'}}</span>
+            </ion-col>
+            <ion-col col-4 *ngIf="status.isMyPartner">
+                已加入
+                <span>我的诊所</span>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,38 @@
+
+<!-- 邀请 -->
+
+<ion-header>
+    <ion-navbar>
+        <ion-title>邀请同行与患者</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content>
+
+    <ion-thumbnail class="img-box" [ngStyle]="{ 'background-image': 'url(assets/imgs/invite-banner.png)'}"></ion-thumbnail>
+    <div text-center>
+        <div class="photo">
+            <img class="box-shadow" src="assets/imgs/doc-zhuanzhen@3x.png">
+        </div>
+        <h2>
+            张三 <span ion-text color="gray">主任医师</span>
+        </h2>
+        <h4 ion-text color="gray">上海第六人民医院 内科</h4>
+        <qr-code [value]="'http://m.whiteplanet.com.cn/invite.html?id=10d10afc2b5c4db7b9a52589df4fe738&pic=sSqw4W5n&name=张三&title=主任医师'" [size]="150"></qr-code>
+        <p>微信扫一扫</p>
+        <p>同行——加入我的诊所，让我们相互转接诊；<br>患者——加入我的诊所，帮你寻找靠谱医生。</p>
+    </div>
+</ion-content>
+
+<ion-footer>
+    <ion-row>
+        <ion-col col-6 tappable (click)="addShare(0)">
+            <img src="assets/imgs/weixin.png">
+            <span>微信</span>
+        </ion-col>
+        <ion-col col-6 tappable (click)="addShare(1)">
+            <img src="assets/imgs/pengyou.png">
+            <span>朋友圈</span>
+        </ion-col>
+    </ion-row>
+</ion-footer>

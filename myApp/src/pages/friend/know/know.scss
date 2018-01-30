@@ -1,0 +1,113 @@
+page-know {
+    .content-md,.content-ios{
+        background: color($colors, graybg);
+        color: color($colors, dark);
+    }
+    .department{
+        padding-top:16px;
+        padding-left:16px;
+        background: color($colors, white);
+        border-bottom:1px solid color($colors,graybg);
+        font-size:1.4rem;
+        span{
+            background:color($colors, graybg);
+            color:color($colors, gray);
+            display:inline-block;
+            padding:.45rem 1rem;
+            border-radius:3px;
+            margin:0 .6rem .6rem 0;
+        }
+        span:active, .active{
+            background:color($colors, lightBlue);
+            color:color($colors, white);
+        }
+        ion-icon{
+            color:color($colors, graybg);
+            font-size:2.8rem;
+            margin-top:-5px;
+            padding:0 20px 0 4px;
+        }
+        .dlist{
+            overflow: hidden;
+            max-height: 6rem;
+        }
+    }
+    .list{
+      position: relative;
+      .partner-item{
+        h2{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          span{
+            font-size: 1.4rem;
+          }
+        }
+        h4{
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+      }
+      .operating{
+          position: absolute;
+          top:30%;
+          right:10px;
+          button{
+              padding:0 1.1rem;
+              font-size:1.2rem;
+              margin:0;
+              height: 1.9em;
+              ion-icon{
+                  font-size:2.6rem;
+              }
+          }
+      }
+      .joined{
+          background:color($colors, white);
+          padding:0 0 12px 16px;
+          text-align:left;
+          border-bottom: 1px solid #e9e9e9;
+          div{
+              overflow: hidden;
+              text-overflow: ellipsis;
+              word-break: break-all;
+              white-space: nowrap;
+              height:20px;
+              padding-right:16px;
+              ion-icon{
+                  margin:0 6px;
+              }
+              span{
+                  color: color($colors, primary);
+              }
+              span:last-child i{
+                  display: none;
+              }
+              background:color($colors, graybg);
+              font-size:1.4rem;
+          }
+      }
+    }
+    .item-ios[detail-push] .item-inner, button.item-ios:not([detail-none]) .item-inner, a.item-ios:not([detail-none]) .item-inner{
+      background-image:none;
+      padding-right: 8px;
+    }
+
+    .no-data{
+        text-align: center;
+        p{
+            color:#888;
+            font-size:1.45rem;
+        }
+        img{
+            width:40%;
+            opacity:0.5;
+        }
+    }
+
+    @media screen and (min-width: 320px) and (max-width: 320px) {
+        .department span{padding:.6rem 1rem;}
+    }
+
+}

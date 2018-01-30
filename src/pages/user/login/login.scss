@@ -1,0 +1,16 @@
+page-login {
+    .content-ios,.content-md{
+        background-image:$bg;
+        background-size:cover;
+    }
+    .item-ios,.item-md{
+        background:none;
+        padding-left:0;
+    }
+    .text-input-ios,.text-input-md{
+        padding-left:10px;
+    }
+    .scroll-content{
+        padding:40px!important;
+    }
+}

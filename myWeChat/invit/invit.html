@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" href="reset.css">
+	<link rel="stylesheet" href="invit.css">
+	<script type="text/javascript" src="fit.js"></script>
+</head>
+<body>
+    <div class="invit">
+	    <img src="../assets/imgs/invit/invitBack.png" alt="">
+    </div>
+    <div class="invit-footer">
+	    <input type="tel" class="invit-tel" placeholder="请输入您的手机号"
+	    onkeyup="check()" maxlength="11">
+    </div>
+	<script src="../assets/app.min.js"></script>
+    <script>
+        Zepto(function($){
+           var flag = true;
+           check =function () {
+                   if($('.invit-tel').val().length == 11){
+                        if(flag){
+                            flag = false;
+                            var tel = $('.invit-tel').val()
+                            window.location.href = 'index.html?tel='+tel;
+                        }
+                   }
+            }
+        })
+    </script>
+</body>
+</html>

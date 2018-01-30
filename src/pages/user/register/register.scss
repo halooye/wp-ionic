@@ -1,0 +1,19 @@
+page-register {
+    .content-ios,.content-md{
+        background-image:$bg;
+        background-size:cover;
+    }
+    .item-ios,.item-md{
+        background:none;
+        padding-left:0;
+    }
+    .text-input-ios,.text-input-md{
+        padding-left:10px;
+    }
+    .scroll-content{
+        padding:40px!important;
+    }
+    .header-ios .toolbar-ios:last-child .toolbar-background-ios{
+        border-width: 0;
+    }
+}

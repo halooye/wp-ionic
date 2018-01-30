@@ -1,0 +1,43 @@
+<!--约诊费用-->
+<div class="basic-back" *ngIf="flag==true"></div>
+<ion-header>
+  <ion-navbar>
+      <ion-title center text-center>约诊费</ion-title>
+      <ion-buttons end>
+        <button ion-button>
+          <ion-note style="color: black">2-2</ion-note>
+        </button>
+      </ion-buttons>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+   <div text-right color="primary" style="color: #307fa0" (tap)="aboutPrice()">关于约诊费?</div>
+   <div style="padding-top: 100px" text-center class="basic-top">
+       <h6 style="margin-bottom: 0;color: #454b5a">请输入您的约诊费</h6>
+       <ion-item style="width: 44%;margin: 0 auto;min-height: 4.4rem;padding-left: 0;align-items: flex-end;-webkit-align-items: flex-end;padding-top: 15px" class="">
+         <ion-label color="primary">&nbsp;&nbsp;&nbsp;&nbsp;￥</ion-label>
+         <ion-input type="tel" [placeholder]='stateParams.minPrice'
+                    [(ngModel)]="price" (ionChange)="change()"
+                    (keyup)="limitNum()"
+                    style="color: #307fa0;font-size: 2.5rem" (keypress)="press($event)" maxlength="5" style="margin: 0;color: #307fa0;font-size: 2.8rem"></ion-input>
+       </ion-item>
+        <p style="margin: 0;padding-top: 10px;color: #454b5a">
+          {{level}}默认最低约诊费为￥{{stateParams.minPrice}}元
+        </p>
+   </div>
+    <div class="payment-box">
+      <div class="payment-notice">
+        <p style="color: #454b5a">若您一天接转诊3次，月收入最高可</p>
+        <p style="color: #454b5a">达&nbsp;<span style="color: #307fa0;font-size: 2rem">{{total}}</span>&nbsp;元！</p>
+        <p style="color: #454b5a">点击&nbsp;&nbsp;&nbsp;<ion-icon ios="ios-calculator" md="md-calculator" style="vertical-align: text-top;color: #307fa0"></ion-icon>&nbsp;&nbsp;&nbsp;<span style="color: #307fa0" (tap)="openModal({charNum: 0})">收益计算器</span>&nbsp;&nbsp;&nbsp;查看计算详情</p>
+      </div>
+    </div>
+    <p text-center style="margin-top:0;color: #454b5a;padding-top: 30px" class="basic-p">提交表示您同意<span style="color: #307fa0"><</span><span style="color: #307fa0">白色星球协议</span><span style="color: #307fa0">></span></p>
+    <div text-center>
+      <button ion-button round (tap)="gotoIndentity()" style="width: 50%;background-color: #454b5a">提交</button>
+    </div>
+    <div text-center padding-top style="color: #a8abb2">
+      如果您在认证过程中遇到任何问题<br>
+      请联系白色星球客服:021-64225665
+    </div>
+</ion-content>

@@ -1,0 +1,55 @@
+<!--搜索医院-->
+<div class="basic-back" *ngIf="flag==true"></div>
+<ion-header [ngClass]="!isFocus ? 'basic-head2' :'basic-head'">
+  <ion-navbar>
+    <ion-title>选择所在医院</ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content [ngClass]="{'basic-content':isFocus}">
+  <div showWhen="ios" style="height: 20px" *ngIf="isFocus"></div>
+  <ion-searchbar (ionInput)="getItems($event)" placeholder="请输入医院名称" (ionBlur)="getBlur()"
+                 (ionFocus)="getFocus()" showCancelButton="true" cancelButtonText="取消" [(ngModel)]="val"
+                 padding style="background-color: rgba(204, 204, 204, 0.2)" animated="true"
+                 (ionCancel)="cancelSearch()" (ionClear)="clearInput()" debounce="1000" #search
+                 [ngClass]="{'basic-true':val != ''|| (isFocus && val == '' && items.length ==0),'basic-false':!(val != ''|| (isFocus && val == '' && items.length ==0)),
+                 'basic-search-first':!isFocus,'basic-search-last':isFocus}"
+  ></ion-searchbar>
+      <ion-refresher (ionRefresh)="doRefresh($event)">
+          <ion-refresher-content pullingIcon="arrow-dropdown"
+                                 pullingText="下拉刷新"
+                                 refreshingSpinner="circles"
+                                 refreshingText="刷新中">
+          </ion-refresher-content>
+      </ion-refresher>
+      <ion-item (tap)="openAddModal()" *ngIf="items.length != 0 && val == ''&& isFocus==false" style="min-height: 5rem;" class="basic-item">
+          <ion-avatar item-start>
+              <img src="assets/imgs/ymy/searchlogo@3x.png" style="width: 36px;height: 36px">
+          </ion-avatar>
+          <h2 style="font-weight: 600;color: #454b5a;font-size: 14px;margin-bottom: 1px">新增医院</h2>
+          <p style="font-size: 12px;margin-top: 3px">找不到医院，点击此处新增医院</p>
+      </ion-item>
+       <div style="background-color: #ededee;line-height: 1.8rem;color: #888c95;font-size: 1rem;height: 1.8rem" *ngIf="items.length != 0 && val != '' " padding-left>
+          医院列表
+       </div>
+      <div *ngIf="val=='' && isFocus==true" style="background-color: #ededee;height: 100%;padding-top: 22%">
+        <img src="assets/imgs/ymy/search@3x.png" style="display: block;width: 30%;margin: 0 auto;padding-top: 10%">
+        <p style="margin: 0 auto;color: #8b8f98;padding-top: 8%" text-center>请输入您想搜索的医院名称</p>
+      </div>
+      <div *ngIf="val!=''&& items.length==0" style="background-color: #ededee;height: 100%;padding-top: 20%">
+        <img src="assets/imgs/ymy/searchfail@3x.png" style="display: block;width: 30%;margin: 0 auto;padding-top: 10%" *ngIf="items.length==0" >
+        <p style="margin: 0 auto;color: #8b8f98;" padding-top text-center *ngIf="items.length==0">找不到您输入的内容</p>
+        <p style="margin: 0 auto;color: #8b8f98;" padding-top text-center *ngIf="items.length==0">可以换个词试试</p>
+      </div>
+      <ion-list *ngIf="(items.length != 0 && isFocus==false && val =='') || (items.length != 0 && val != '')" style="margin-bottom: 10px">
+          <ion-item *ngFor="let item of items" (tap)="select(item)">
+              <h2 style="font-size: 14px;color: #454b5a;line-height: 1.6">{{item.name}}</h2>
+              <p style="font-size: 13px;color: #a2a5ac">{{item.city}}&nbsp;·&nbsp;{{item.address}}</p>
+          </ion-item>
+      </ion-list>
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)"
+                           *ngIf="items.length%20==0 && items.length>0">
+          <ion-infinite-scroll-content loadingText="加载更多数据..." style="min-height: 40px">
+
+          </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+</ion-content>

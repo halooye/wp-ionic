@@ -1,0 +1,42 @@
+page-baiqiuying {
+  .content-md,.content-ios{
+    background: #f2f2f2;
+    color: color($colors, dark);
+  }
+  ion-content{
+    img{
+      display: block;
+      border-bottom: 1px solid #dedede;
+    }
+    .fankui{
+      color: #454b5a;
+      border-bottom: 1px solid #dedede;
+      min-height: 5.8rem;
+      margin-bottom: 15px;
+      .item-inner{
+        border-bottom: none!important;
+      }
+    }
+     .list{
+        .question{
+          border-bottom: 1px solid #dedede!important;
+           .item-inner{
+             border-bottom: none;
+           }
+        }
+       .noBack{
+         padding-left: 0;
+         .item-inner{
+           background: none!important;
+         }
+         span{
+           display: block;
+           width: 7px;
+           height: 100%;
+           background-color: #307fa0;
+           margin-right: 9px;
+         }
+       }
+     }
+  }
+}

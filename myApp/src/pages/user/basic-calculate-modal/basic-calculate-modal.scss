@@ -1,0 +1,120 @@
+page-basic-calculate-modal {
+  @media screen and (max-width:320px){
+    ion-grid{
+      ion-col{
+        h6{
+          font-size: 11px!important;
+        }
+        dd{
+          font-size: 12px!important;
+        }
+      }
+    }
+    ion-list{
+      span{
+        font-size: 10px!important;
+      }
+      .basic-please{
+        font-size: 10px!important;
+      }
+    }
+    .modal_content{
+      height: 400px!important;
+    }
+  }
+  .main-view{
+    background: transparent;
+  }
+  .overlay {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    opacity: .5;
+    background-color: #333;
+  }
+  .modal_content {
+    position: absolute;
+    border-radius: 1.5rem;
+    top: 15%;
+    left: 0;
+    right: 0;
+    width: 90%;
+    height: 430px;
+    z-index: 100;
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0 2px 3px rgba(51, 51, 51, .35);
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    overflow: hidden;
+  }
+  .toolbar-content-md{
+    order: 4!important;
+    -webkit-order:4!important;
+  }
+  ion-input{
+    margin: 0!important;
+    input{
+         margin: 0!important;
+    }
+  }
+  ion-list{
+    border-bottom: 1px solid #e9e9e9;
+    margin-bottom: 0!important;
+    span{
+      //padding: 2px;
+      border-radius: 3px;
+      font-size: 12px;
+      line-height: 20px;
+      height: 20px;
+      padding:0 4px;
+    }
+  }
+  ion-grid{
+    border-bottom: 1px solid #e9e9e9;
+    ion-col{
+      dl{
+        margin-top: 0;
+        h6{
+          font-size: 1.4rem;
+          margin: 0;
+          line-height: 1.8rem!important;
+        }
+        p{
+          font-size: 1.2rem;
+          margin: 0;
+        }
+        dd{
+          margin-left: 0;
+          //line-height: 3rem;
+          color: #307fa0;
+        }
+      }
+    }
+  }
+
+
+  // 输入框下划线
+  .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+      border-bottom:0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+  .item-md.item-input.item-input-has-focus .item-inner,
+  .item-md.item-input.input-has-focus .item-inner {
+      border-bottom:0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+
+  .list-md .item-input.item-input-has-focus:last-child,
+  .list-md .item-input.input-has-focus:last-child {
+      border-bottom:0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+  }
+}

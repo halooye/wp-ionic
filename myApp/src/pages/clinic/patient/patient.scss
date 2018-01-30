@@ -1,0 +1,10 @@
+page-patient {
+    .content-md,.content-ios{
+        background: color($colors, graybg);
+        color: color($colors, dark);
+    }
+    .dossier{
+        font-size:1.4rem;
+        margin-right:4px;
+    }
+}

@@ -1,0 +1,35 @@
+page-basic-project {
+   .activated{
+     background-color: transparent!important;
+   }
+   //.basic-project{
+   //  .fixed-content{
+   //    margin-bottom: 100px!important;
+   //  }
+   //  .scroll-content{
+   //    margin-bottom: 100px!important;
+   //  }
+   //}
+
+   // 输入框下划线
+   .item-md.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner, .item-md.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner{
+       border-bottom:0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+   }
+
+   .item-md.item-input.item-input-has-focus .item-inner,
+   .item-md.item-input.input-has-focus .item-inner {
+       border-bottom:0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+   }
+
+   .list-md .item-input.item-input-has-focus:last-child,
+   .list-md .item-input.input-has-focus:last-child {
+       border-bottom:0;
+       -webkit-box-shadow: none;
+       box-shadow: none;
+   }
+
+}

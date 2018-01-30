@@ -1,0 +1,37 @@
+<!--
+      用户反馈
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>用户反馈</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-item style="margin-top:10px;">
+        <textarea [(ngModel)]="content" maxlength="400" rows="9" cols="21" wrap="soft" placeholder=""></textarea>
+        <div class="count" text-right>400字以内</div>
+    </ion-item>
+    <ion-row padding>
+        <button ion-button color="dark" block [disabled]="!disable" (click)="save()">提交</button>
+    </ion-row>
+    <ion-grid class="picTransfer">
+       <ion-row>
+           <ion-col col-4 text-center *ngFor="let item of list;let i = index">
+               <button class="picCenter" set-height>
+                 <ion-badge class="shanchu" tappable (click)="delete(i)">-</ion-badge>
+                 <ion-spinner name="bubbles" *ngIf="!item.load"></ion-spinner>
+                 <img src="{{item.pic}}" alt="" (load)="load($event,i)" [hidden]="!item.load">
+               </button>
+           </ion-col>
+          <ion-col col-4 text-center>
+              <button class="picCenter" set-height (click)="getPic()">
+                <ion-icon name="add"></ion-icon>
+              </button>
+          </ion-col>
+       </ion-row>
+    </ion-grid>
+</ion-content>

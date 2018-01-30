@@ -1,0 +1,22 @@
+<!--
+      系统设置
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>设置</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+    <ion-list>
+        <button ion-item>帮助手册</button>
+        <button ion-item (click)="feedback()">用户反馈</button>
+        <button ion-item (click)="aboutus()">关于白色星球</button>
+    </ion-list>
+    <ion-list>
+        <button ion-item (tap)="logOut()">退出登录</button>
+    </ion-list>
+</ion-content>

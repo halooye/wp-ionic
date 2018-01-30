@@ -1,0 +1,54 @@
+<!--
+   我的人脉首页
+-->
+
+<ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-buttons end>
+            <button ion-button icon-only color="dark" (click)="share()">
+                <ion-icon name="add"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-title>
+            我的人脉
+        </ion-title>
+    </ion-navbar>
+
+    <div class="friend-tab">
+        <span [ngClass]="{'active-tab': currentPage == 0}" (click)="goToSlide(0)">一度人脉</span>
+        <span [ngClass]="{'active-tab': currentPage == 1 || currentPage == 2}" (click)="goToSlide(1)">二度人脉</span>
+    </div>
+</ion-header>
+
+<ion-content scroll="false">
+
+    <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="isRefresh">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="下拉刷新" refreshingSpinner="circles" refreshingText="刷新中..."></ion-refresher-content>
+    </ion-refresher>
+    <ion-slides (ionSlideDidChange)="slideChanged()">
+        <ion-slide>
+            <ion-content (ionScroll)="scrollHandler($event)" [ngStyle]="styleObject" (tap)="isTranslate3d()" *ngIf="isOpenClinic">
+                <page-first [firstTab]="firstTab" [firstDoctorsCount]="firstDoctorsCount" [firstList]="firstList"></page-first>
+            </ion-content>
+            <div class="no-data" *ngIf="!isOpenClinic">
+                <img src="assets/imgs/no-clinic.png" style="padding-top:60px;">
+                <p>您还没有开通诊所，开通后就拓展人脉啦！</p>
+                <div text-center style="padding:20px 20%;">
+                    <button ion-button block color="dark" (click)="basicBtn()">开通诊所</button>
+                </div>
+            </div>
+        </ion-slide>
+        <ion-slide>
+            <ion-content (ionScroll)="scrollHandler($event)" *ngIf="isOpenClinic">
+                <page-know [dnowTab]="dnowTab" [dnowDoctorsCount]="dnowDoctorsCount" [dnowList]="dnowList"></page-know>
+            </ion-content>
+            <div class="no-data" *ngIf="!isOpenClinic">
+                <img src="assets/imgs/no-clinic.png" style="padding-top:60px;">
+                <p>您还没有开通诊所，开通后就拓展人脉啦！</p>
+                <div text-center style="padding:20px 20%;">
+                    <button ion-button block color="dark" (click)="basicBtn()">开通诊所</button>
+                </div>
+            </div>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
